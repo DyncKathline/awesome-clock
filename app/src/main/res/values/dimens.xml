@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="clock_padding">20dp</dimen>
+    <dimen name="clock_text_size">100dp</dimen>
+    <dimen name="clock_corner_size">2dp</dimen>
+
+</resources>

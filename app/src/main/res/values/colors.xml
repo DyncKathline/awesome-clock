@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--时钟背景色-->
+    <color name="clock_bg">#121212</color>
+    <!--时钟文字颜色-->
+    <color name="clock_text">#bababa</color>
+    <!--时钟分割线颜色-->
+    <color name="clock_divider">#000000</color>
+
+</resources>
