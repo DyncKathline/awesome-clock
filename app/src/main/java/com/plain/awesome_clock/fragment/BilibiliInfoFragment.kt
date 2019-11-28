@@ -28,7 +28,7 @@ class BilibiliInfoFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_bilibili_info, container, false)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return rootView
     }
 
     override fun initData() {
