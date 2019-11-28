@@ -18,6 +18,7 @@
             android:layout_height="wrap_content" />
 
         <FrameLayout
+            android:id="@+id/flPoint01"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#121212"
@@ -25,6 +26,7 @@
             android:paddingRight="5dp">
 
             <TextView
+                android:id="@+id/tvPoint01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -45,6 +47,7 @@
             android:layout_height="wrap_content" />
 
         <FrameLayout
+            android:id="@+id/flPoint02"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#121212"
@@ -52,6 +55,7 @@
             android:paddingRight="5dp">
 
             <TextView
+                android:id="@+id/tvPoint02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

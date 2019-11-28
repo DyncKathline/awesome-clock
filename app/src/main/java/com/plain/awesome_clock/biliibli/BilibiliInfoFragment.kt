@@ -1,4 +1,4 @@
-package com.plain.awesome_clock.fragment
+package com.plain.awesome_clock.biliibli
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import com.plain.awesome_clock.R
 import com.plain.awesome_clock.base.BaseFragment
 
 /**
- *
- *
+ * 哔哩哔哩信息页
  *
  * @author Plain
  * @date 2019-11-28 15:08

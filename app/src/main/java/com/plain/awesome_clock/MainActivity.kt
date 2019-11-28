@@ -1,12 +1,16 @@
 package com.plain.awesome_clock
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
-import com.plain.awesome_clock.fragment.BilibiliInfoFragment
-import com.plain.awesome_clock.fragment.FlipClockFragment
+import android.view.ViewGroup
+import com.plain.awesome_clock.base.BaseActivity
+import com.plain.awesome_clock.biliibli.BilibiliInfoFragment
+import com.plain.awesome_clock.filpClock.FlipClockFragment
+import com.plain.awesome_clock.setting.SettingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -15,7 +19,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSystemUIVisible(false)
         setContentView(R.layout.activity_main)
         setInit()
     }
@@ -32,11 +35,20 @@ class MainActivity : BaseActivity() {
         initViewPager()
     }
 
+    override fun setListener() {
+        super.setListener()
+
+        ivSetting.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
+        }
+    }
+
     private fun initViewPager() {
+        viewPager.removeAllViews()
         val pagerAdapter = MyPagerAdapter(supportFragmentManager, fragmentList)
         viewPager.currentItem = 0
         viewPager.adapter = pagerAdapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {
 
             }
@@ -49,6 +61,11 @@ class MainActivity : BaseActivity() {
 
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initViewPager()
     }
 
     private class MyPagerAdapter(
