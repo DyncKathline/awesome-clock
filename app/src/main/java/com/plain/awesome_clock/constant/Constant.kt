@@ -14,4 +14,8 @@ object Constant {
 
     const val SETTING_EMPTY = -1
 
+    const val CLOCK_RESUME = "clock_resume"
+
+    const val CLOCK_PAUSE = "clock_pause"
+
 }

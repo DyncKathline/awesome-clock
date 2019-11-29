@@ -6,16 +6,51 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.ViewGroup
 import com.plain.awesome_clock.base.BaseActivity
 import com.plain.awesome_clock.biliibli.BilibiliInfoFragment
+import com.plain.awesome_clock.constant.Constant
 import com.plain.awesome_clock.filpClock.FlipClockFragment
 import com.plain.awesome_clock.setting.SettingActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
 
 class MainActivity : BaseActivity() {
 
     private lateinit var fragmentList: ArrayList<Fragment>
+
+    private val pagerAdapter by lazy {
+        MyPagerAdapter(supportFragmentManager, fragmentList)
+    }
+
+    private val pagerListener by lazy {
+        object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(p0: Int) {
+
+            }
+
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+
+            }
+
+            override fun onPageSelected(p0: Int) {
+                Log.d(TAG, "onPageSelected:$p0")
+                controlClockStatus(p0)
+            }
+        }
+    }
+
+    /**
+     * 控制时钟的开始和暂停
+     */
+    private fun controlClockStatus(p0: Int) {
+        if (p0 == 0) {
+            EventBus.getDefault().post(Constant.CLOCK_RESUME)
+        } else {
+            EventBus.getDefault().post(Constant.CLOCK_PAUSE)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,22 +80,10 @@ class MainActivity : BaseActivity() {
 
     private fun initViewPager() {
         viewPager.removeAllViews()
-        val pagerAdapter = MyPagerAdapter(supportFragmentManager, fragmentList)
+        viewPager.removeOnPageChangeListener(pagerListener)
         viewPager.currentItem = 0
         viewPager.adapter = pagerAdapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(p0: Int) {
-
-            }
-
-            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-
-            }
-
-            override fun onPageSelected(p0: Int) {
-
-            }
-        })
+        viewPager.addOnPageChangeListener(pagerListener)
     }
 
     override fun onResume() {
@@ -82,6 +105,10 @@ class MainActivity : BaseActivity() {
             return fragmentList.size
         }
 
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 
 }

@@ -2,7 +2,6 @@ package com.plain.awesome_clock.filpClock
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,9 @@ import com.plain.awesome_clock.base.BaseFragment
 import com.plain.awesome_clock.constant.Constant
 import com.plain.awesome_clock.utils.SettingCacheHelper
 import kotlinx.android.synthetic.main.fragment_flip_clock.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.ThreadMode
+import org.greenrobot.eventbus.Subscribe
 
 /**
  * 翻页时钟 ⏰
@@ -30,12 +32,18 @@ class FlipClockFragment : BaseFragment() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_flip_clock, container, false)
+        rootView =
+            inflater.inflate(R.layout.fragment_flip_clock, container, false)
         return rootView
     }
 
@@ -58,11 +66,13 @@ class FlipClockFragment : BaseFragment() {
     private fun updateColor() {
         var clockTextColor = SettingCacheHelper.getClockTextColor()
         if (clockTextColor == Constant.SETTING_EMPTY) {
-            clockTextColor = ContextCompat.getColor(context!!, R.color.clock_text)
+            clockTextColor =
+                ContextCompat.getColor(context!!, R.color.clock_text)
         }
         var clockBgColor = SettingCacheHelper.getClockBgColor()
         if (clockBgColor == Constant.SETTING_EMPTY) {
-            clockBgColor = ContextCompat.getColor(context!!, R.color.clock_bg)
+            clockBgColor =
+                ContextCompat.getColor(context!!, R.color.clock_bg)
         }
         flipClockView.updateColor(clockTextColor, clockBgColor)
     }
@@ -70,6 +80,23 @@ class FlipClockFragment : BaseFragment() {
     override fun onPause() {
         super.onPause()
         flipClockView.pause()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: String) {
+        when (event) {
+            Constant.CLOCK_RESUME -> {
+                flipClockView.resume()
+            }
+            Constant.CLOCK_PAUSE -> {
+                flipClockView.pause()
+            }
+        }
+    };
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
 }

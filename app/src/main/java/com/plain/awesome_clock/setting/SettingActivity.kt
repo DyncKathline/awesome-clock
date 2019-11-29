@@ -1,6 +1,5 @@
 package com.plain.awesome_clock.setting
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.widget.ImageView
@@ -43,6 +42,10 @@ class SettingActivity : BaseActivity() {
 
     override fun setListener() {
         super.setListener()
+
+        back.setOnClickListener{
+            finish()
+        }
 
         rlClockTextColorRely.setOnClickListener {
             buildColorPicker(

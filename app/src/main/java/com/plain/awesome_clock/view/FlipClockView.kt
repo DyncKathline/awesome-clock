@@ -44,7 +44,6 @@ class FlipClockView @JvmOverloads constructor(
     private lateinit var mTvPoint01: TextView
     private lateinit var mTvPoint02: TextView
 
-    private val mClock = this
     private var mPause = true
     private var elapsedTime: Long = 0
 
@@ -54,7 +53,7 @@ class FlipClockView @JvmOverloads constructor(
         object : android.os.Handler(Looper.getMainLooper()) {
             override fun handleMessage(msg: Message?) {
                 super.handleMessage(msg)
-                if (msg?.what == MSG_TASK) {
+                if (msg?.what == MSG_TASK || mPause) {
                     post(runnable)
                 }
             }
