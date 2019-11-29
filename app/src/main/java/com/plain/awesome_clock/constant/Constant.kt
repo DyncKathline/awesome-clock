@@ -18,4 +18,6 @@ object Constant {
 
     const val CLOCK_PAUSE = "clock_pause"
 
+    const val CLOCK_HOUR_TYPE = "clock_hour_type"
+
 }

@@ -2,16 +2,22 @@ package com.plain.awesome_clock.setting
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import com.plain.awesome_clock.R
 import com.plain.awesome_clock.base.BaseActivity
 import com.plain.awesome_clock.constant.Constant
 import com.plain.awesome_clock.utils.SettingCacheHelper
 import com.plain.awesome_clock.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlin.properties.Delegates
+import java.util.*
+import android.text.TextUtils
+import android.widget.Spinner
+import com.plain.awesome_clock.R
+import com.plain.awesome_clock.R.*
 
 /**
  * 设置页面
@@ -26,24 +32,21 @@ class SettingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        setContentView(layout.activity_setting)
         setInit()
-    }
-
-    override fun initData() {
-        super.initData()
-
     }
 
     override fun initView() {
         super.initView()
+        //Spinner相对垂直方向的偏移量（pixel)
+        spClockHour.dropDownVerticalOffset = resources.getDimensionPixelSize(R.dimen.size50)
         initSetting()
     }
 
     override fun setListener() {
         super.setListener()
 
-        back.setOnClickListener{
+        back.setOnClickListener {
             finish()
         }
 
@@ -64,6 +67,31 @@ class SettingActivity : BaseActivity() {
                 ivClockBgColor
             )
         }
+
+        spClockHour.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> {
+                        SettingCacheHelper.setClockHourType(Calendar.HOUR)
+                    }
+                    1 -> {
+                        SettingCacheHelper.setClockHourType(Calendar.HOUR_OF_DAY)
+                    }
+                }
+
+            }
+
+        }
+
     }
 
     private fun initSetting() {
@@ -73,7 +101,8 @@ class SettingActivity : BaseActivity() {
             this.clockTextColor = clockTextColor
             ivClockTextColor.setBackgroundColor(this.clockTextColor)
         } else {
-            this.clockTextColor = ContextCompat.getColor(this, R.color.clock_bg)
+            this.clockTextColor =
+                ContextCompat.getColor(this, color.clock_bg)
             ivClockTextColor.setBackgroundColor(this.clockTextColor)
         }
         //初始化文字背景颜色
@@ -82,9 +111,28 @@ class SettingActivity : BaseActivity() {
             this.clockBgColor = clockBgColor
             ivClockBgColor.setBackgroundColor(this.clockBgColor)
         } else {
-            this.clockBgColor = ContextCompat.getColor(this, R.color.clock_bg)
+            this.clockBgColor =
+                ContextCompat.getColor(this, color.clock_bg)
             ivClockBgColor.setBackgroundColor(this.clockBgColor)
         }
+        val clockHourType = SettingCacheHelper.getClockHourType()
+        val languages = resources.getStringArray(array.hour_type)
+        setSpinnerDefaultValue(
+            spClockHour, when (clockHourType) {
+                Calendar.HOUR -> {
+                    spClockHour.prompt = languages[0]
+                    languages[0]
+                }
+                Calendar.HOUR_OF_DAY -> {
+                    spClockHour.prompt = languages[1]
+                    languages[1]
+                }
+                else -> {
+                    spClockHour.prompt = languages[1]
+                    languages[1]
+                }
+            }
+        )
     }
 
     private fun buildColorPicker(title: String, type: String, color: Int, view: ImageView) {
@@ -130,17 +178,37 @@ class SettingActivity : BaseActivity() {
     ) {
         when (type) {
             Constant.CLOCK_TEXT_COLOR -> {
-                val default = ContextCompat.getColor(this@SettingActivity, R.color.clock_text)
+                val default = ContextCompat.getColor(
+                    this@SettingActivity,
+                    color.clock_text
+                )
                 view.setBackgroundColor(default)
                 SettingCacheHelper.setClockTextColor(default)
             }
             Constant.CLOCK_BG_COLOR -> {
-                val default = ContextCompat.getColor(this@SettingActivity, R.color.clock_bg)
+                val default = ContextCompat.getColor(
+                    this@SettingActivity,
+                    color.clock_bg
+                )
                 view.setBackgroundColor(default)
                 SettingCacheHelper.setClockBgColor(default)
             }
         }
         ToastUtils.showSuccessToast(this, "保存成功")
+    }
+
+    /**
+     * 设置Spinner默认值
+     */
+    private fun setSpinnerDefaultValue(spinner: Spinner, value: String) {
+        val apsAdapter = spinner.adapter
+        val size = apsAdapter.count
+        for (i in 0 until size) {
+            if (TextUtils.equals(value, apsAdapter.getItem(i).toString())) {
+                spinner.setSelection(i, true)
+                break
+            }
+        }
     }
 
 }

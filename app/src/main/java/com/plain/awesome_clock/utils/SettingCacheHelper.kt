@@ -3,6 +3,8 @@ package com.plain.awesome_clock.utils
 import android.text.TextUtils
 import com.plain.awesome_clock.GlobalApp
 import com.plain.awesome_clock.constant.Constant
+import org.w3c.dom.Text
+import java.util.*
 
 /**
  * 设置项缓存帮助类
@@ -49,6 +51,25 @@ object SettingCacheHelper {
             bgColor.toInt()
         } else {
             Constant.SETTING_EMPTY
+        }
+    }
+
+    /**
+     * 保存时钟小时制，包括[Calendar.HOUR]12小时制和[Calendar.HOUR_OF_DAY]24小时制
+     */
+    fun setClockHourType(field: Int) {
+        aCache.put(Constant.CLOCK_HOUR_TYPE, field.toString())
+    }
+
+    /**
+     * 获取时钟的小时制，默认[Calendar.HOUR]12小时制
+     */
+    fun getClockHourType(): Int {
+        val field = aCache.getAsString(Constant.CLOCK_HOUR_TYPE)
+        return if (!TextUtils.isEmpty(field)) {
+            field.toInt()
+        } else {
+            Calendar.HOUR
         }
     }
 

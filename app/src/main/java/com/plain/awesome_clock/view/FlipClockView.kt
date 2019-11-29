@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.plain.awesome_clock.MainActivity
 
 import com.plain.awesome_clock.R
+import com.plain.awesome_clock.utils.SettingCacheHelper
 import com.xenione.digit.TabDigit
 import kotlinx.android.synthetic.main.layout_flip_clock.view.*
 
@@ -179,7 +180,7 @@ class FlipClockView @JvmOverloads constructor(
         mPause = false
         val time = Calendar.getInstance()
         /* hours*/
-        val hour = time.get(Calendar.HOUR_OF_DAY)
+        val hour = time.get(SettingCacheHelper.getClockHourType())
         val highHour = hour / 10
         mCharHighHour.setChar(highHour)
 

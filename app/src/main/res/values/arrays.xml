@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="hour_type">
+        <item>@string/clock_hour_12</item>
+        <item>@string/clock_hour_24</item>
+    </string-array>
+
+</resources>
