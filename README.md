@@ -36,7 +36,7 @@
 
 ### 发布 
 
-最新版本可在版本发布页查看 ![https://github.com/plain-dev/awesome-clock/releases](https://img.shields.io/badge/release-v1.0.1-blue.svg?style=flat)
+最新版本可在版本发布页查看
 
 - [国际站点Github](https://github.com/plain-dev/awesome-clock/releases)
 - [国内站点Gitee(推荐)](https://gitee.com/plain-dev/awesome-clock-release/releases)
