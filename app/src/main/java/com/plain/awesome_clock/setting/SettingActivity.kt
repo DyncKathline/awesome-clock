@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_setting.*
 import kotlin.properties.Delegates
 import java.util.*
 import android.text.TextUtils
+import android.widget.CompoundButton
 import android.widget.Spinner
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.R.*
@@ -54,6 +55,10 @@ class SettingActivity : BaseActivity() {
 
         about.setOnClickListener {
             startActivity(Intent(this@SettingActivity, AboutActivity::class.java))
+        }
+
+        swShowSecond.setOnCheckedChangeListener { _, isChecked ->
+            SettingCacheHelper.setClockIsShowSecond(isChecked)
         }
 
         rlClockTextColorRely.setOnClickListener {
@@ -139,6 +144,8 @@ class SettingActivity : BaseActivity() {
                 }
             }
         )
+        //初始化是否显示秒
+        swShowSecond.isChecked = SettingCacheHelper.getClockIsShowSecond()
     }
 
     private fun buildColorPicker(title: String, type: String, color: Int, view: ImageView) {

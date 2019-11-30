@@ -73,4 +73,25 @@ object SettingCacheHelper {
         }
     }
 
+    /**
+     * 保存时钟是否显示秒
+     */
+    fun setClockIsShowSecond(isShowSecond: Boolean) {
+        aCache.put(
+            Constant.CLOCK_IS_SHOW_SECOND, if (isShowSecond) {
+                "0"
+            } else {
+                "1"
+            }
+        )
+    }
+
+    /**
+     * 获取时钟是否显示秒
+     */
+    fun getClockIsShowSecond(): Boolean {
+        val isShowSecond = aCache.getAsString(Constant.CLOCK_IS_SHOW_SECOND)
+        return TextUtils.isEmpty(isShowSecond) || isShowSecond == "0"
+    }
+
 }

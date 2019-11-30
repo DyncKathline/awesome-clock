@@ -20,4 +20,6 @@ object Constant {
 
     const val CLOCK_HOUR_TYPE = "clock_hour_type"
 
+    const val CLOCK_IS_SHOW_SECOND = "clock_is_show_second"
+
 }

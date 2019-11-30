@@ -150,6 +150,33 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rlClockShowSecondRely"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="是否显示秒"
+                    android:textColor="@color/clock_text"
+                    android:textSize="20dp" />
+
+                <Switch
+                    android:id="@+id/swShowSecond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_trace_selector" />
+
+            </RelativeLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

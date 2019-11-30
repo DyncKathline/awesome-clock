@@ -47,6 +47,7 @@ class FlipClockView @JvmOverloads constructor(
 
     private var mPause = true
     private var elapsedTime: Long = 0
+    private var isShowSecond = true
 
     private lateinit var runnable: Runnable
 
@@ -109,6 +110,13 @@ class FlipClockView @JvmOverloads constructor(
         mTvPoint01 = findViewById(R.id.tvPoint01)
         mTvPoint02 = findViewById(R.id.tvPoint02)
 
+        initFlipView()
+    }
+
+    /**
+     * 初始化翻页时钟样式
+     */
+    private fun initFlipView() {
         setFlipView(mCharHighSecond, SEXAGISIMAL)
         setFlipView(mCharLowSecond)
         setFlipView(mCharHighMinute, SEXAGISIMAL)
@@ -122,15 +130,61 @@ class FlipClockView @JvmOverloads constructor(
     }
 
     private fun setFlipView(view: TabDigit, chars: CharArray?, isLow: Boolean = false) {
-        view.padding = resources.getDimensionPixelSize(R.dimen.clock_padding)
-        view.textSize = resources.getDimensionPixelSize(R.dimen.clock_text_size)
-        view.backgroundColor = ContextCompat.getColor(context, R.color.clock_bg)
-        view.textColor = ContextCompat.getColor(context, R.color.clock_text)
-        view.setDividerColor(ContextCompat.getColor(context, R.color.clock_divider))
-        view.cornerSize = resources.getDimensionPixelSize(R.dimen.clock_corner_size)
+        setFlipViewSize(view)
+        setFlipViewColor(view)
         if (!isLow) {
             view.chars = chars
         }
+    }
+
+    /**
+     * 设置分割线颜色
+     */
+    private fun setFlipViewColor(view: TabDigit) {
+        view.setDividerColor(ContextCompat.getColor(context, R.color.clock_divider))
+    }
+
+    /**
+     * 设置翻页时钟的样式
+     */
+    private fun setFlipViewSize(view: TabDigit) {
+        view.padding = if (isShowSecond) {
+            resources.getDimensionPixelSize(R.dimen.clock_padding)
+        } else {
+            resources.getDimensionPixelSize(R.dimen.clock_padding_big)
+        }
+        view.textSize = if (isShowSecond) {
+            resources.getDimensionPixelSize(R.dimen.clock_text_size)
+        } else {
+            resources.getDimensionPixelSize(R.dimen.clock_text_size_big)
+        }
+        view.cornerSize = if (isShowSecond) {
+            resources.getDimensionPixelSize(R.dimen.clock_corner_size)
+        } else {
+            resources.getDimensionPixelSize(R.dimen.clock_corner_size_big)
+        }
+    }
+
+    /**
+     * 设置时钟是否显示秒
+     */
+    fun setFlipClockIsShowSecond(isShowSecond: Boolean) {
+        this.isShowSecond = isShowSecond
+        if (isShowSecond) {
+            mCharHighSecond.visibility = View.VISIBLE
+            mCharLowSecond.visibility = View.VISIBLE
+            mFlPoint02.visibility = View.VISIBLE
+        } else {
+            mCharHighSecond.visibility = View.GONE
+            mCharLowSecond.visibility = View.GONE
+            mFlPoint02.visibility = View.GONE
+        }
+        setFlipViewSize(mCharHighSecond)
+        setFlipViewSize(mCharLowSecond)
+        setFlipViewSize(mCharHighMinute)
+        setFlipViewSize(mCharLowMinute)
+        setFlipViewSize(mCharHighHour)
+        setFlipViewSize(mCharLowHour)
     }
 
     /**

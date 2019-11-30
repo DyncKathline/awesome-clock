@@ -5,6 +5,10 @@
     <dimen name="clock_text_size">100dp</dimen>
     <dimen name="clock_corner_size">2dp</dimen>
 
+    <dimen name="clock_padding_big">20dp</dimen>
+    <dimen name="clock_text_size_big">150dp</dimen>
+    <dimen name="clock_corner_size_big">6dp</dimen>
+
     <dimen name="size50">50dp</dimen>
 
 </resources>

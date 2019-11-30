@@ -60,10 +60,13 @@ class FlipClockFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         flipClockView.resume()
-        updateColor()
+        updateSetting()
     }
 
-    private fun updateColor() {
+    /**
+     * 更新设置
+     */
+    private fun updateSetting() {
         var clockTextColor = SettingCacheHelper.getClockTextColor()
         if (clockTextColor == Constant.SETTING_EMPTY) {
             clockTextColor =
@@ -75,6 +78,7 @@ class FlipClockFragment : BaseFragment() {
                 ContextCompat.getColor(context!!, R.color.clock_bg)
         }
         flipClockView.updateColor(clockTextColor, clockBgColor)
+        flipClockView.setFlipClockIsShowSecond(SettingCacheHelper.getClockIsShowSecond())
     }
 
     override fun onPause() {
