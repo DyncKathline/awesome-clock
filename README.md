@@ -1,4 +1,6 @@
-![ic_launcher-web](/app/src/main/ic_launcher-web.png)
+<div align="center">
+  <img src="./app/src/main/ic_launcher-web.png" width='150px' alt="ic_launcher-web">
+</div>
 
 ## AwesomeClock
 
