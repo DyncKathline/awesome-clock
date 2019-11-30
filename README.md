@@ -1,3 +1,5 @@
+![ic_launcher-web](/app/src/main/ic_launcher-web.png)
+
 ## AwesomeClock
 
 ![预览](/screenshot/flipClock.png)
