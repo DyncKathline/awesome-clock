@@ -21,6 +21,17 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '28.0.0'
+            }
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -40,4 +51,10 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     //消息总线
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //about
+    implementation "me.drakeet.support:about:2.1.1"
+    implementation "me.drakeet.support:about-extension:2.1.1"
+    implementation "me.drakeet.multitype:multitype:3.4.4"
+
 }

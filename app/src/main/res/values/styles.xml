@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--About theme-->
+    <style name="AppTheme.About" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/clock_bg</item>
+        <item name="colorPrimaryDark">@color/clock_bg</item>
+        <item name="colorAccent">@color/clock_bg</item>
+    </style>
+
 </resources>

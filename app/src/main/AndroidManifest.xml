@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.plain.awesome_clock">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GlobalApp"
         android:allowBackup="true"
@@ -23,7 +25,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".setting.SettingActivity" />
+            android:name=".setting.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".about.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.About" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.plain.awesome_clock.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
@@ -18,6 +19,7 @@ import android.text.TextUtils
 import android.widget.Spinner
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.R.*
+import com.plain.awesome_clock.about.AboutActivity
 
 /**
  * 设置页面
@@ -48,6 +50,10 @@ class SettingActivity : BaseActivity() {
 
         back.setOnClickListener {
             finish()
+        }
+
+        about.setOnClickListener {
+            startActivity(Intent(this@SettingActivity, AboutActivity::class.java))
         }
 
         rlClockTextColorRely.setOnClickListener {

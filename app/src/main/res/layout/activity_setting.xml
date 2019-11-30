@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -26,18 +26,31 @@
                     android:id="@+id/back"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_back" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/back"
                     android:text="设置"
                     android:textColor="@color/clock_text"
                     android:textSize="50dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/about"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_about" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlClockTextColorRely"
@@ -126,16 +139,26 @@
                     android:textSize="20dp" />
 
                 <Spinner
-                    android:padding="6dp"
                     android:id="@+id/spClockHour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/circle_bg"
-                    android:entries="@array/hour_type" />
+                    android:entries="@array/hour_type"
+                    android:padding="6dp" />
 
             </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/copyright"
+                android:textColor="@color/clock_text"
+                android:textSize="14dp" />
 
         </LinearLayout>
 
