@@ -2,6 +2,18 @@
   <img src="./app/src/main/ic_launcher-web.png" width='150px' alt="ic_launcher-web">
 </div>
 
+<div style="display: flex;justify-content: center;" align="center">
+  <a href="https://kotlinlang.org" style="margin: 0 5px;">
+    <img src="https://img.shields.io/badge/language-Kotlin-important.svg?style=flat" alt="language">
+  </a>
+   <a href="https://github.com/plain-dev/awesome-clock/releases">
+    <img src="https://img.shields.io/badge/release-v1.0.1-blue.svg?style=flat" alt="release">
+  </a>
+   <a href="https://github.com/plain-dev/awesome-clock/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache 2-red.svg?style=flat" alt="license">
+  </a>
+</div>
+
 ## AwesomeClock
 
 ![预览](/screenshot/flipClock.png)
@@ -22,9 +34,9 @@
 - 可对时钟的翻页背景色、文字颜色和小时制进行设置
 - 没有任何权限请求
 
-### 发布
+### 发布 
 
-最新版本可在版本发布页查看
+最新版本可在版本发布页查看 ![](https://img.shields.io/badge/release-v1.0.1-519dd9.svg?style=flat)
 
 - [国际站点Github](https://github.com/plain-dev/awesome-clock/releases)
 - [国内站点Gitee(推荐)](https://gitee.com/plain-dev/awesome-clock-release/releases)
