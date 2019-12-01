@@ -16,9 +16,21 @@
 
 ## AwesomeClock
 
-![预览](/screenshot/flipClock.png)
+### 预览
 
----
+<table>
+    <tr>
+        <td>设置</td> 
+        <td>首页</td> 
+   </tr>
+    <tr>
+        <td rowspan="2"><img src='./screenshot/setting.png' /></td>    
+        <td ><img src='./screenshot/clock_01.png' /></td>  
+    </tr>
+    <tr>
+        <td ><img src='./screenshot/clock_02.png' /></td>  
+    </tr>
+</table>
 
 ### 介绍
 
