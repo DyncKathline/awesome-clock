@@ -1,17 +1,16 @@
 package com.plain.awesome_clock.view
 
 import android.content.Context
+import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.plain.awesome_clock.MainActivity
 
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.utils.SettingCacheHelper
@@ -19,7 +18,6 @@ import com.xenione.digit.TabDigit
 import kotlinx.android.synthetic.main.layout_flip_clock.view.*
 
 import java.util.Calendar
-import java.util.logging.Handler
 
 /**
  * FlipClockView
@@ -42,8 +40,8 @@ class FlipClockView @JvmOverloads constructor(
     private lateinit var mCharLowHour: TabDigit
     private lateinit var mFlPoint01: FrameLayout
     private lateinit var mFlPoint02: FrameLayout
-    private lateinit var mTvPoint01: TextView
-    private lateinit var mTvPoint02: TextView
+    private lateinit var mTvPoint01: GlintTextView
+    private lateinit var mTvPoint02: GlintTextView
 
     private var mPause = true
     private var elapsedTime: Long = 0
@@ -51,11 +49,11 @@ class FlipClockView @JvmOverloads constructor(
 
     private lateinit var runnable: Runnable
 
-    private val mHandler: android.os.Handler by lazy {
-        object : android.os.Handler(Looper.getMainLooper()) {
+    private val mHandler: Handler by lazy {
+        object : Handler(Looper.getMainLooper()) {
             override fun handleMessage(msg: Message?) {
                 super.handleMessage(msg)
-                if (msg?.what == MSG_TASK || mPause) {
+                if (msg?.what == MSG_TASK && !mPause) {
                     post(runnable)
                 }
             }
@@ -166,6 +164,14 @@ class FlipClockView @JvmOverloads constructor(
     }
 
     /**
+     * 设置指针是否闪烁
+     */
+    fun setFlipClockIsGlint(isGlint:Boolean){
+        mTvPoint01.isGlint = isGlint
+        mTvPoint02.isGlint = isGlint
+    }
+
+    /**
      * 设置时钟是否显示秒
      */
     fun setFlipClockIsShowSecond(isShowSecond: Boolean) {
@@ -218,6 +224,8 @@ class FlipClockView @JvmOverloads constructor(
 
     fun pause() {
         Log.d(TAG, "pause")
+        tvPoint01.pause()
+        tvPoint02.pause()
         mHandler.removeCallbacksAndMessages(null)
         mPause = true
         mCharHighSecond.sync()
@@ -230,6 +238,8 @@ class FlipClockView @JvmOverloads constructor(
 
     fun resume() {
         Log.d(TAG, "resume")
+        tvPoint01.resume()
+        tvPoint02.resume()
         mHandler.removeCallbacksAndMessages(null)
         mPause = false
         val time = Calendar.getInstance()

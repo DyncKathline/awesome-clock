@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/language-Kotlin-important.svg?style=flat" alt="language">
   </a>
    <a href="https://github.com/plain-dev/awesome-clock/releases">
-    <img src="https://img.shields.io/badge/release-v1.0.1-blue.svg?style=flat" alt="release">
+    <img src="https://img.shields.io/badge/release-v1.0.2-blue.svg?style=flat" alt="release">
   </a>
    <a href="https://github.com/plain-dev/awesome-clock/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache 2-red.svg?style=flat" alt="license">
@@ -54,6 +54,12 @@
 - [国内站点Gitee(推荐)](https://gitee.com/plain-dev/awesome-clock-release/releases)
 
 ### 更新日志
+
+#### v1.0.2
+
+本次更新内容如下
+
+- 新增 时钟指针是否闪烁设置选项
 
 #### v1.0.1
 

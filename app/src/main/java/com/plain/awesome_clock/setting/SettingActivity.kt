@@ -57,9 +57,9 @@ class SettingActivity : BaseActivity() {
             startActivity(Intent(this@SettingActivity, AboutActivity::class.java))
         }
 
-        swShowSecond.setOnCheckedChangeListener { _, isChecked ->
-            SettingCacheHelper.setClockIsShowSecond(isChecked)
-        }
+        swShowSecond.setOnCheckedChangeListener { _, isChecked -> SettingCacheHelper.setClockIsShowSecond(isChecked) }
+
+        swGlint.setOnCheckedChangeListener { _, isChecked -> SettingCacheHelper.setClockIsGlint(isChecked) }
 
         rlClockTextColorRely.setOnClickListener {
             buildColorPicker(
@@ -146,6 +146,8 @@ class SettingActivity : BaseActivity() {
         )
         //初始化是否显示秒
         swShowSecond.isChecked = SettingCacheHelper.getClockIsShowSecond()
+        //初始化指针是否闪烁
+        swGlint.isChecked = SettingCacheHelper.getClockIsGlint()
     }
 
     private fun buildColorPicker(title: String, type: String, color: Int, view: ImageView) {

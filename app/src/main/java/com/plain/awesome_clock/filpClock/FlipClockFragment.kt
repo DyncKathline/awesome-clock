@@ -79,6 +79,7 @@ class FlipClockFragment : BaseFragment() {
         }
         flipClockView.updateColor(clockTextColor, clockBgColor)
         flipClockView.setFlipClockIsShowSecond(SettingCacheHelper.getClockIsShowSecond())
+        flipClockView.setFlipClockIsGlint(SettingCacheHelper.getClockIsGlint())
     }
 
     override fun onPause() {

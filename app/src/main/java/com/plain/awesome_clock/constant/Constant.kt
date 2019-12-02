@@ -22,4 +22,6 @@ object Constant {
 
     const val CLOCK_IS_SHOW_SECOND = "clock_is_show_second"
 
+    const val CLOCK_IS_GLINT = "clock_is_glint"
+
 }

@@ -94,4 +94,25 @@ object SettingCacheHelper {
         return TextUtils.isEmpty(isShowSecond) || isShowSecond == "0"
     }
 
+    /**
+     * 保存时钟指针是否闪烁
+     */
+    fun setClockIsGlint(isGlint: Boolean) {
+        aCache.put(
+            Constant.CLOCK_IS_GLINT, if (isGlint) {
+                "0"
+            } else {
+                "1"
+            }
+        )
+    }
+
+    /**
+     * 获取时钟指针是否闪烁
+     */
+    fun getClockIsGlint(): Boolean {
+        val isGlint = aCache.getAsString(Constant.CLOCK_IS_GLINT)
+        return TextUtils.isEmpty(isGlint) || isGlint == "0"
+    }
+
 }
