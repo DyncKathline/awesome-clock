@@ -6,15 +6,15 @@
   <a href="https://kotlinlang.org" style="margin: 0 5px;">
     <img src="https://img.shields.io/badge/language-Kotlin-important.svg?style=flat" alt="language">
   </a>
-   <a href="https://github.com/plain-dev/awesome-clock/releases">
+   <a href="https://github.com/plain-dev/awesome-clock/releases" style="margin: 0 5px;">
     <img src="https://img.shields.io/badge/release-v1.0.3-blue.svg?style=flat" alt="release">
   </a>
-   <a href="https://github.com/plain-dev/awesome-clock/blob/master/LICENSE">
+   <a href="https://github.com/plain-dev/awesome-clock/blob/master/LICENSE" style="margin: 0 5px;">
     <img src="https://img.shields.io/badge/license-Apache 2-red.svg?style=flat" alt="license">
   </a>
 </div>
 
-## AwesomeClock
+## AwesomeClock [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 ### 预览
 
