@@ -18,17 +18,19 @@
 
 ### 预览
 
+演示机型：HUAWEI Mate 30 Pro
+
 <table>
     <tr>
         <td>设置</td> 
         <td>首页</td> 
    </tr>
     <tr>
-        <td rowspan="2"><img src='./screenshot/setting.png' /></td>    
-        <td ><img src='./screenshot/clock_01.png' /></td>  
+        <td rowspan="2"><img src='./screenshot/setting.jpg' /></td>    
+        <td ><img src='./screenshot/clock_01.jpg' /></td>  
     </tr>
     <tr>
-        <td ><img src='./screenshot/clock_02.png' /></td>  
+        <td ><img src='./screenshot/clock_02.jpg' /></td>  
     </tr>
 </table>
 

@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -38,8 +39,8 @@ class FlipClockView @JvmOverloads constructor(
     private lateinit var mCharLowMinute: TabDigit
     private lateinit var mCharHighHour: TabDigit
     private lateinit var mCharLowHour: TabDigit
-    private lateinit var mFlPoint01: FrameLayout
-    private lateinit var mFlPoint02: FrameLayout
+    private lateinit var mFlPoint01: CardView
+    private lateinit var mFlPoint02: CardView
     private lateinit var mTvPoint01: GlintTextView
     private lateinit var mTvPoint02: GlintTextView
 
@@ -121,6 +122,8 @@ class FlipClockView @JvmOverloads constructor(
         setFlipView(mCharLowMinute)
         setFlipView(mCharHighHour, HOURS)
         setFlipView(mCharLowHour)
+        setCardViewSize(mFlPoint01)
+        setCardViewSize(mFlPoint02)
     }
 
     private fun setFlipView(view: TabDigit?) {
@@ -164,6 +167,17 @@ class FlipClockView @JvmOverloads constructor(
     }
 
     /**
+     * 设置 CardView Size
+     */
+    private fun setCardViewSize(cardView:CardView){
+        cardView.radius = if (isShowSecond) {
+            resources.getDimension(R.dimen.clock_corner_size)
+        } else {
+            resources.getDimension(R.dimen.clock_corner_size_big)
+        }
+    }
+
+    /**
      * 设置指针是否闪烁
      */
     fun setFlipClockIsGlint(isGlint:Boolean){
@@ -203,8 +217,8 @@ class FlipClockView @JvmOverloads constructor(
         setTextAndBgColor(textColor, bgColor, mCharLowMinute)
         setTextAndBgColor(textColor, bgColor, mCharHighHour)
         setTextAndBgColor(textColor, bgColor, mCharLowHour)
-        flPoint01.setBackgroundColor(bgColor)
-        flPoint02.setBackgroundColor(bgColor)
+        flPoint01.setCardBackgroundColor(bgColor)
+        flPoint02.setCardBackgroundColor(bgColor)
         tvPoint01.setTextColor(textColor)
         tvPoint02.setTextColor(textColor)
     }

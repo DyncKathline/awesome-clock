@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="clock_padding">20dp</dimen>
-    <dimen name="clock_text_size">100dp</dimen>
-    <dimen name="clock_corner_size">2dp</dimen>
-
-    <dimen name="clock_padding_big">20dp</dimen>
+    <dimen name="clock_margin">-10dp</dimen>
+    <dimen name="clock_padding">15dp</dimen>
+    <dimen name="clock_text_size">120dp</dimen>
+    <dimen name="clock_corner_size">4dp</dimen>
+    <dimen name="clock_padding_big">15dp</dimen>
     <dimen name="clock_text_size_big">150dp</dimen>
-    <dimen name="clock_corner_size_big">6dp</dimen>
-
+    <dimen name="clock_corner_size_big">4dp</dimen>
+    <dimen name="point_area_size">20dp</dimen>
+    <dimen name="point_text_size">50dp</dimen>
     <dimen name="size50">50dp</dimen>
 
 </resources>
