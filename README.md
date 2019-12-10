@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/language-Kotlin-important.svg?style=flat" alt="language">
   </a>
    <a href="https://github.com/plain-dev/awesome-clock/releases" style="margin: 0 5px;">
-    <img src="https://img.shields.io/badge/release-v1.0.3-blue.svg?style=flat" alt="release">
+    <img alt="GitHub release" src="https://img.shields.io/github/v/release/plain-dev/awesome-clock">
   </a>
    <a href="https://github.com/plain-dev/awesome-clock/blob/master/LICENSE" style="margin: 0 5px;">
     <img src="https://img.shields.io/badge/license-Apache 2-red.svg?style=flat" alt="license">
