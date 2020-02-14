@@ -86,7 +86,7 @@ class AboutActivity : AbsAboutActivity() {
     override fun onCreateHeader(icon: ImageView, slogan: TextView, version: TextView) {
         icon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground))
         slogan.setText(R.string.about_slogan)
-        version.text = "v${BuildConfig.VERSION_NAME}"
+        version.text = BuildConfig.VERSION_NAME
     }
 
 }

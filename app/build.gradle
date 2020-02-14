@@ -7,10 +7,10 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.plain.awesome_clock"
-        minSdkVersion 21
+        minSdkVersion 18
         targetSdkVersion 28
-        versionCode 1
-        versionName "v1.0.0-coolapk"
+        versionCode 2
+        versionName "v1.0.1-coolapk"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
