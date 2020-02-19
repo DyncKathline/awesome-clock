@@ -9,9 +9,8 @@ import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
+import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.utils.SettingCacheHelper
@@ -29,9 +28,8 @@ import java.util.Calendar
 class FlipClockView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     private lateinit var mCharHighSecond: TabDigit
     private lateinit var mCharLowSecond: TabDigit
@@ -66,7 +64,6 @@ class FlipClockView @JvmOverloads constructor(
     }
 
     private fun init() {
-        orientation = HORIZONTAL
         View.inflate(context, R.layout.layout_flip_clock, this)
         initRunnable()
     }
@@ -149,16 +146,31 @@ class FlipClockView @JvmOverloads constructor(
      * 设置翻页时钟的样式
      */
     private fun setFlipViewSize(view: TabDigit) {
-        view.padding = if (isShowSecond) {
-            resources.getDimensionPixelSize(R.dimen.clock_padding)
+
+        // 如果自定义了时钟大小
+        val clockViewSize = SettingCacheHelper.getClockViewSize()
+        if (clockViewSize != 0) {
+            view.textSize = clockViewSize
         } else {
-            resources.getDimensionPixelSize(R.dimen.clock_padding_big)
+            view.textSize = if (isShowSecond) {
+                resources.getDimensionPixelSize(R.dimen.clock_text_size)
+            } else {
+                resources.getDimensionPixelSize(R.dimen.clock_text_size_big)
+            }
         }
-        view.textSize = if (isShowSecond) {
-            resources.getDimensionPixelSize(R.dimen.clock_text_size)
+
+        // 如果自定义了时钟间距
+        val clockViewPadding = SettingCacheHelper.getClockViewPadding()
+        if (clockViewPadding != 0) {
+            view.padding = clockViewPadding
         } else {
-            resources.getDimensionPixelSize(R.dimen.clock_text_size_big)
+            view.padding = if (isShowSecond) {
+                resources.getDimensionPixelSize(R.dimen.clock_padding)
+            } else {
+                resources.getDimensionPixelSize(R.dimen.clock_padding_big)
+            }
         }
+
         view.cornerSize = if (isShowSecond) {
             resources.getDimensionPixelSize(R.dimen.clock_corner_size)
         } else {
@@ -169,7 +181,7 @@ class FlipClockView @JvmOverloads constructor(
     /**
      * 设置 CardView Size
      */
-    private fun setCardViewSize(cardView:CardView){
+    private fun setCardViewSize(cardView: CardView) {
         cardView.radius = if (isShowSecond) {
             resources.getDimension(R.dimen.clock_corner_size)
         } else {
@@ -180,7 +192,7 @@ class FlipClockView @JvmOverloads constructor(
     /**
      * 设置指针是否闪烁
      */
-    fun setFlipClockIsGlint(isGlint:Boolean){
+    fun setFlipClockIsGlint(isGlint: Boolean) {
         mTvPoint01.isGlint = isGlint
         mTvPoint02.isGlint = isGlint
     }
@@ -234,6 +246,24 @@ class FlipClockView @JvmOverloads constructor(
     private fun setTextAndBgColor(textColor: Int, bgColor: Int, view: TabDigit) {
         setTextColor(textColor, view)
         setBgColo(bgColor, view)
+    }
+
+    fun customTextSize(size: Int) {
+        mCharHighSecond.textSize = size
+        mCharLowSecond.textSize = size
+        mCharHighMinute.textSize = size
+        mCharLowMinute.textSize = size
+        mCharHighHour.textSize = size
+        mCharLowHour.textSize = size
+    }
+
+    fun customPadding(padding: Int) {
+        mCharHighSecond.padding = padding
+        mCharLowSecond.padding = padding
+        mCharHighMinute.padding = padding
+        mCharLowMinute.padding = padding
+        mCharHighHour.padding = padding
+        mCharLowHour.padding = padding
     }
 
     fun pause() {

@@ -9,12 +9,13 @@ android {
         applicationId "com.plain.awesome_clock"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 2
-        versionName "v1.0.1-coolapk"
+        versionCode 10
+        versionName "1.0.0 - 蹒跚学步版"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
+            zipAlignEnabled true //开启压缩
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

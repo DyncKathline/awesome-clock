@@ -11,4 +11,6 @@
     <!--时钟分割线颜色-->
     <color name="clock_divider">#000000</color>
 
+    <color name="color_white">#FFFFFF</color>
+
 </resources>

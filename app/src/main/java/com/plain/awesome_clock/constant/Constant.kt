@@ -24,4 +24,12 @@ object Constant {
 
     const val CLOCK_IS_GLINT = "clock_is_glint"
 
+    const val CLOCK_SIZE_TYPE_1="clock_size_1";
+
+    const val CLOCK_PADDING_TYPE_1 = "clock_padding_1";
+
+    const val CLOCK_SIZE_TYPE_2="clock_size_2";
+
+    const val CLOCK_PADDING_TYPE_2 = "clock_padding_2";
+
 }

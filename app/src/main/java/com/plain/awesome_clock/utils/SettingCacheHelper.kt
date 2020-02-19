@@ -115,4 +115,72 @@ object SettingCacheHelper {
         return TextUtils.isEmpty(isGlint) || isGlint == "0"
     }
 
+    /**
+     * 保存时钟大小
+     */
+    fun setClockViewSize(size: Int) {
+        val clockIsShowSecond = getClockIsShowSecond()
+        if (clockIsShowSecond) {
+            aCache.put(Constant.CLOCK_SIZE_TYPE_1, size.toString())
+        } else {
+            aCache.put(Constant.CLOCK_SIZE_TYPE_2, size.toString())
+        }
+    }
+
+    /**
+     * 获取时钟大小
+     */
+    fun getClockViewSize(): Int {
+        val clockIsShowSecond = getClockIsShowSecond()
+        return if (clockIsShowSecond) {
+            val padding = aCache.getAsString(Constant.CLOCK_SIZE_TYPE_1)
+            if (TextUtils.isEmpty(padding)) {
+                0;
+            } else {
+                padding.toInt()
+            }
+        } else {
+            val padding = aCache.getAsString(Constant.CLOCK_SIZE_TYPE_2)
+            if (TextUtils.isEmpty(padding)) {
+                0;
+            } else {
+                padding.toInt()
+            }
+        }
+    }
+
+    /**
+     * 保存时钟内间距
+     */
+    fun setClockViewPadding(size: Int) {
+        val clockIsShowSecond = getClockIsShowSecond()
+        if (clockIsShowSecond) {
+            aCache.put(Constant.CLOCK_PADDING_TYPE_1, size.toString())
+        } else {
+            aCache.put(Constant.CLOCK_PADDING_TYPE_2, size.toString())
+        }
+    }
+
+    /**
+     * 获取时钟内间距
+     */
+    fun getClockViewPadding(): Int {
+        val clockIsShowSecond = getClockIsShowSecond()
+        return if (clockIsShowSecond) {
+            val padding = aCache.getAsString(Constant.CLOCK_PADDING_TYPE_1)
+            if (TextUtils.isEmpty(padding)) {
+                0;
+            } else {
+                padding.toInt()
+            }
+        } else {
+            val padding = aCache.getAsString(Constant.CLOCK_PADDING_TYPE_2)
+            if (TextUtils.isEmpty(padding)) {
+                0;
+            } else {
+                padding.toInt()
+            }
+        }
+    }
+
 }

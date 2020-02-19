@@ -1,88 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:clock="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:clock="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <LinearLayout
+    <com.xenione.digit.TabDigit
+        android:id="@+id/charHighHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.xenione.digit.TabDigit
+        android:id="@+id/charLowHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginStart="@dimen/clock_margin" />
 
-        <com.xenione.digit.TabDigit
-            android:id="@+id/charHighHour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/flPoint01"
+        android:layout_width="@dimen/point_area_size"
+        android:layout_height="match_parent"
+        android:background="#121212"
+        clock:cardElevation="0dp"
+        clock:cardPreventCornerOverlap="false">
 
-        <com.xenione.digit.TabDigit
-            android:layout_marginStart="@dimen/clock_margin"
-            android:id="@+id/charLowHour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <android.support.v7.widget.CardView
-            clock:cardElevation="0dp"
-            clock:cardPreventCornerOverlap="false"
-            android:id="@+id/flPoint01"
-            android:layout_width="@dimen/point_area_size"
-            android:layout_height="match_parent"
-            android:background="#121212">
-
-            <com.plain.awesome_clock.view.GlintTextView
-                android:gravity="center"
-                android:id="@+id/tvPoint01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/point_text_size"
-                android:layout_gravity="center"
-                android:text="@string/point_text"
-                android:textColor="#bababa"
-                android:textStyle="bold"/>
-
-        </android.support.v7.widget.CardView>
-
-        <com.xenione.digit.TabDigit
-            android:id="@+id/charHighMinute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <com.xenione.digit.TabDigit
-            android:layout_marginStart="@dimen/clock_margin"
-            android:id="@+id/charLowMinute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <android.support.v7.widget.CardView
-            clock:cardElevation="0dp"
-            clock:cardPreventCornerOverlap="false"
-            android:id="@+id/flPoint02"
-            android:layout_width="@dimen/point_area_size"
-            android:layout_height="match_parent"
-            android:background="#121212">
-
-            <com.plain.awesome_clock.view.GlintTextView
-                android:gravity="center"
-                android:id="@+id/tvPoint02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/point_text"
-                android:textSize="@dimen/point_text_size"
-                android:textColor="#bababa"
-                android:textStyle="bold"/>
-
-        </android.support.v7.widget.CardView>
-
-        <com.xenione.digit.TabDigit
-            android:id="@+id/charHighSecond"
+        <com.plain.awesome_clock.view.GlintTextView
+            android:id="@+id/tvPoint01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/point_text"
+            android:textColor="#bababa"
+            android:textSize="@dimen/point_text_size"
+            android:textStyle="bold" />
 
-        <com.xenione.digit.TabDigit
-            android:layout_marginStart="@dimen/clock_margin"
-            android:id="@+id/charLowSecond"
+    </android.support.v7.widget.CardView>
+
+    <com.xenione.digit.TabDigit
+        android:id="@+id/charHighMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.xenione.digit.TabDigit
+        android:id="@+id/charLowMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/clock_margin" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/flPoint02"
+        android:layout_width="@dimen/point_area_size"
+        android:layout_height="match_parent"
+        android:background="#121212"
+        clock:cardElevation="0dp"
+        clock:cardPreventCornerOverlap="false">
+
+        <com.plain.awesome_clock.view.GlintTextView
+            android:id="@+id/tvPoint02"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/point_text"
+            android:textColor="#bababa"
+            android:textSize="@dimen/point_text_size"
+            android:textStyle="bold" />
 
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-</merge>
+    <com.xenione.digit.TabDigit
+        android:id="@+id/charHighSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.xenione.digit.TabDigit
+        android:id="@+id/charLowSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/clock_margin" />
+
+</LinearLayout>

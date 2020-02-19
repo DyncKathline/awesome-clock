@@ -2,13 +2,17 @@ package com.plain.awesome_clock.filpClock
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.AppCompatSeekBar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
+import com.plain.awesome_clock.GlobalApp
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.base.BaseFragment
 import com.plain.awesome_clock.constant.Constant
 import com.plain.awesome_clock.utils.SettingCacheHelper
+import com.plain.awesome_clock.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_flip_clock.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.ThreadMode
@@ -32,6 +36,44 @@ class FlipClockFragment : BaseFragment() {
 
     }
 
+    private val textSizeListener: SeekBar.OnSeekBarChangeListener by lazy {
+        object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    flipClockView.customTextSize(progress)
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        }
+    }
+
+    private val paddingSizeListener: SeekBar.OnSeekBarChangeListener by lazy {
+        object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    flipClockView.customPadding(progress)
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
@@ -47,20 +89,36 @@ class FlipClockFragment : BaseFragment() {
         return rootView
     }
 
-    override fun initData() {
-        super.initData()
-
-    }
-
-    override fun initView() {
-        super.initView()
-
-    }
-
     override fun onResume() {
         super.onResume()
+        size_bar.setOnSeekBarChangeListener(textSizeListener)
+        padding_size_bar.setOnSeekBarChangeListener(paddingSizeListener)
+        btnSave.setOnClickListener {
+            saveCustomSizeSetting()
+            hideCustomToolbar()
+        }
+        mainView.setOnLongClickListener {
+            showCustomToolbar()
+            return@setOnLongClickListener true
+        }
         flipClockView.resume()
         updateSetting()
+    }
+
+    private fun saveCustomSizeSetting() {
+        val size = size_bar.progress
+        val padding = padding_size_bar.progress
+        SettingCacheHelper.setClockViewSize(size)
+        SettingCacheHelper.setClockViewPadding(padding)
+        ToastUtils.showSuccessToast(this.context!!, "保存成功");
+    }
+
+    private fun showCustomToolbar() {
+        customSizeToolbar.visibility = View.VISIBLE
+    }
+
+    private fun hideCustomToolbar() {
+        customSizeToolbar.visibility = View.GONE
     }
 
     /**

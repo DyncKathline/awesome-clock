@@ -1,18 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:id="@+id/mainView"
     android:background="#000000"
     android:gravity="center"
     tools:context=".MainActivity">
 
     <com.plain.awesome_clock.view.FlipClockView
         android:id="@+id/flipClockView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center" />
 
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/customSizeToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="#65464646"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="5dp"
+                android:text="时钟大小"
+                android:textColor="@color/color_white" />
+
+            <android.support.v7.widget.AppCompatSeekBar
+                android:id="@+id/size_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="800"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="5dp"
+                android:text="时钟间距"
+                android:textColor="@color/color_white" />
+
+            <android.support.v7.widget.AppCompatSeekBar
+                android:id="@+id/padding_size_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:padding="5dp" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

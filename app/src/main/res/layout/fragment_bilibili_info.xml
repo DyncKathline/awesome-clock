@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="尽情期待"
+        android:text="@string/coming_soon"
         android:textColor="@color/clock_text"
         android:textSize="100dp" />
 

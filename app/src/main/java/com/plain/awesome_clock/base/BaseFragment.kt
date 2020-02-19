@@ -1,5 +1,6 @@
 package com.plain.awesome_clock.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -25,21 +26,21 @@ open class BaseFragment : Fragment() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    private fun setInit(){
+    private fun setInit() {
         initData()
         initView()
         setListener()
     }
 
-    protected open fun initData(){
+    protected open fun initData() {
 
     }
 
-    protected open fun initView(){
+    protected open fun initView() {
 
     }
 
-    protected open fun setListener(){
+    protected open fun setListener() {
 
     }
 
