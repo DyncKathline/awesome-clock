@@ -2,7 +2,7 @@ package com.plain.awesome_clock.base
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import android.view.ViewGroup
  * @author Plain
  * @date 2019-11-28 14:34
  */
-open class BaseFragment : Fragment() {
+open class BaseFragment : androidx.fragment.app.Fragment() {
 
     protected lateinit var rootView: View
 

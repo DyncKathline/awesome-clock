@@ -1,16 +1,15 @@
 package com.plain.awesome_clock.about
 
 import android.annotation.SuppressLint
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.widget.ImageView
 import android.widget.TextView
+import com.drakeet.about.AbsAboutActivity
+import com.drakeet.about.Category
+import com.drakeet.about.Contributor
+import com.drakeet.about.License
 import com.plain.awesome_clock.BuildConfig
 import com.plain.awesome_clock.R
-import me.drakeet.multitype.Items
-import me.drakeet.support.about.AbsAboutActivity
-import me.drakeet.support.about.Category
-import me.drakeet.support.about.Contributor
-import me.drakeet.support.about.License
 
 /**
  * 关于界面
@@ -20,11 +19,18 @@ import me.drakeet.support.about.License
  */
 class AboutActivity : AbsAboutActivity() {
 
-    override fun onItemsCreated(items: Items) {
+    @SuppressLint("SetTextI18n")
+    override fun onCreateHeader(icon: ImageView, slogan: TextView, version: TextView) {
+        icon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground))
+        slogan.setText(R.string.about_slogan)
+        version.text = BuildConfig.VERSION_NAME
+    }
+
+    override fun onItemsCreated(items: MutableList<Any>) {
         items.add(Category("Developers"))
         items.add(
             Contributor(
-                R.drawable.avantor,
+                R.mipmap.avantor,
                 "Plain",
                 "Developer",
                 "https://github.com/plain-dev"
@@ -80,13 +86,6 @@ class AboutActivity : AbsAboutActivity() {
                 "https://github.com/PureWriter/about-page"
             )
         )
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun onCreateHeader(icon: ImageView, slogan: TextView, version: TextView) {
-        icon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground))
-        slogan.setText(R.string.about_slogan)
-        version.text = BuildConfig.VERSION_NAME
     }
 
 }

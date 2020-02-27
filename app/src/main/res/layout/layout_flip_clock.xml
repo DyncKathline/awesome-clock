@@ -4,19 +4,19 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-
-    <com.xenione.digit.TabDigit
+   
+    <com.plain.awesome_clock.view.digit.TabDigit
         android:id="@+id/charHighHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.xenione.digit.TabDigit
+    <com.plain.awesome_clock.view.digit.TabDigit
         android:id="@+id/charLowHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/clock_margin" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/flPoint01"
         android:layout_width="@dimen/point_area_size"
         android:layout_height="match_parent"
@@ -35,20 +35,20 @@
             android:textSize="@dimen/point_text_size"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <com.xenione.digit.TabDigit
+    <com.plain.awesome_clock.view.digit.TabDigit
         android:id="@+id/charHighMinute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.xenione.digit.TabDigit
+    <com.plain.awesome_clock.view.digit.TabDigit
         android:id="@+id/charLowMinute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/clock_margin" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/flPoint02"
         android:layout_width="@dimen/point_area_size"
         android:layout_height="match_parent"
@@ -67,15 +67,15 @@
             android:textSize="@dimen/point_text_size"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <com.xenione.digit.TabDigit
+    <com.plain.awesome_clock.view.digit.TabDigit
         android:id="@+id/charHighSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <com.xenione.digit.TabDigit
+    <com.plain.awesome_clock.view.digit.TabDigit
         android:id="@+id/charLowSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

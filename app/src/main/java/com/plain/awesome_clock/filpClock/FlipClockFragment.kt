@@ -1,8 +1,8 @@
 package com.plain.awesome_clock.filpClock
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatSeekBar
+import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatSeekBar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

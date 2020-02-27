@@ -2,10 +2,10 @@ package com.plain.awesome_clock
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.util.Log
 import android.view.ViewGroup
 import com.plain.awesome_clock.base.BaseActivity
@@ -18,14 +18,14 @@ import org.greenrobot.eventbus.EventBus
 
 class MainActivity : BaseActivity() {
 
-    private lateinit var fragmentList: ArrayList<Fragment>
+    private lateinit var fragmentList: ArrayList<androidx.fragment.app.Fragment>
 
     private val pagerAdapter by lazy {
         MyPagerAdapter(supportFragmentManager, fragmentList)
     }
 
     private val pagerListener by lazy {
-        object : ViewPager.OnPageChangeListener {
+        object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {
 
             }
@@ -92,12 +92,12 @@ class MainActivity : BaseActivity() {
     }
 
     private class MyPagerAdapter(
-        fragmentManager: FragmentManager,
-        var fragmentList: List<Fragment>
+        fragmentManager: androidx.fragment.app.FragmentManager,
+        var fragmentList: List<androidx.fragment.app.Fragment>
     ) :
-        FragmentPagerAdapter(fragmentManager) {
+        androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
-        override fun getItem(p0: Int): Fragment {
+        override fun getItem(p0: Int): androidx.fragment.app.Fragment {
             return fragmentList[p0]
         }
 

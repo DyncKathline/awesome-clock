@@ -4,17 +4,16 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.utils.SettingCacheHelper
-import com.xenione.digit.TabDigit
+import com.plain.awesome_clock.view.digit.TabDigit
 import kotlinx.android.synthetic.main.layout_flip_clock.view.*
 
 import java.util.Calendar
@@ -37,8 +36,8 @@ class FlipClockView @JvmOverloads constructor(
     private lateinit var mCharLowMinute: TabDigit
     private lateinit var mCharHighHour: TabDigit
     private lateinit var mCharLowHour: TabDigit
-    private lateinit var mFlPoint01: CardView
-    private lateinit var mFlPoint02: CardView
+    private lateinit var mFlPoint01: androidx.cardview.widget.CardView
+    private lateinit var mFlPoint02: androidx.cardview.widget.CardView
     private lateinit var mTvPoint01: GlintTextView
     private lateinit var mTvPoint02: GlintTextView
 
@@ -181,7 +180,7 @@ class FlipClockView @JvmOverloads constructor(
     /**
      * 设置 CardView Size
      */
-    private fun setCardViewSize(cardView: CardView) {
+    private fun setCardViewSize(cardView: androidx.cardview.widget.CardView) {
         cardView.radius = if (isShowSecond) {
             resources.getDimension(R.dimen.clock_corner_size)
         } else {
