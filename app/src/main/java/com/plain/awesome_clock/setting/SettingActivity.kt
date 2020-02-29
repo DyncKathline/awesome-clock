@@ -1,6 +1,7 @@
 package com.plain.awesome_clock.setting
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import android.view.View
@@ -57,9 +58,17 @@ class SettingActivity : BaseActivity() {
             startActivity(Intent(this@SettingActivity, AboutActivity::class.java))
         }
 
-        swShowSecond.setOnCheckedChangeListener { _, isChecked -> SettingCacheHelper.setClockIsShowSecond(isChecked) }
+        swShowSecond.setOnCheckedChangeListener { _, isChecked ->
+            SettingCacheHelper.setClockIsShowSecond(
+                isChecked
+            )
+        }
 
-        swGlint.setOnCheckedChangeListener { _, isChecked -> SettingCacheHelper.setClockIsGlint(isChecked) }
+        swGlint.setOnCheckedChangeListener { _, isChecked ->
+            SettingCacheHelper.setClockIsGlint(
+                isChecked
+            )
+        }
 
         rlClockTextColorRely.setOnClickListener {
             buildColorPicker(

@@ -287,7 +287,8 @@ class FlipClockView @JvmOverloads constructor(
         mPause = false
         val time = Calendar.getInstance()
         /* hours*/
-        val hour = time.get(SettingCacheHelper.getClockHourType())
+        // 2020.02.29 fix 12小时制中午12点显示0的问题
+        val hour = getHour(time)
         val highHour = hour / 10
         mCharHighHour.setChar(highHour)
 
@@ -315,6 +316,22 @@ class FlipClockView @JvmOverloads constructor(
                 + lowHour * 3600 + highHour * 36000).toLong()
 
         mHandler.sendEmptyMessageDelayed(MSG_TASK, 1000)
+    }
+
+    /**
+     * 获取时间（处理一下12小时制时，凌晨12点和中午12点都显示0的问题）
+     * 详细见[Calendar.HOUR]
+     */
+    private fun getHour(time: Calendar): Int {
+        val clockHourType = SettingCacheHelper.getClockHourType()
+        var hour = time.get(clockHourType)
+        if (clockHourType == Calendar.HOUR) {
+            val amOrPm = time.get(Calendar.AM_PM)
+            if (amOrPm == Calendar.PM && hour == 0) {
+                hour = 12
+            }
+        }
+        return hour;
     }
 
     companion object {

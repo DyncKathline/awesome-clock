@@ -76,6 +76,7 @@ class MainActivity : BaseActivity() {
         ivSetting.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
+
     }
 
     private fun initViewPager() {

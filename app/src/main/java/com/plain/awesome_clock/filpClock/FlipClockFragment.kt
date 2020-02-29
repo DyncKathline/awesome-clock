@@ -1,5 +1,6 @@
 package com.plain.awesome_clock.filpClock
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatSeekBar
@@ -11,6 +12,8 @@ import com.plain.awesome_clock.GlobalApp
 import com.plain.awesome_clock.R
 import com.plain.awesome_clock.base.BaseFragment
 import com.plain.awesome_clock.constant.Constant
+import com.plain.awesome_clock.setting.SettingActivity
+import com.plain.awesome_clock.utils.MultiClickHelper
 import com.plain.awesome_clock.utils.SettingCacheHelper
 import com.plain.awesome_clock.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_flip_clock.*
@@ -89,6 +92,10 @@ class FlipClockFragment : BaseFragment() {
         return rootView
     }
 
+    private fun goSettingPage() {
+        startActivity(Intent(this@FlipClockFragment.context, SettingActivity::class.java))
+    }
+
     override fun onResume() {
         super.onResume()
         size_bar.setOnSeekBarChangeListener(textSizeListener)
@@ -101,6 +108,15 @@ class FlipClockFragment : BaseFragment() {
             showCustomToolbar()
             return@setOnLongClickListener true
         }
+        mainView.setOnTouchListener(MultiClickHelper(object : MultiClickHelper.MultiClickListener {
+            override fun onClickProcess(index: Int) {
+                //ToastUtils.showSuccessToast(this@FlipClockFragment.context!!, "点击了${index}次")
+            }
+
+            override fun onDoSomething() {
+                goSettingPage()
+            }
+        }, 2))
         flipClockView.resume()
         updateSetting()
     }
