@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./app/src/main/ic_launcher-web.png" width='150px' alt="ic_launcher-web">
+  <img src="./app/src/main/ic_launcher-playstore.png" width='150px' alt="ic_launcher-web">
 </div>
 
 <div style="display: flex;justify-content: center;" align="center">

@@ -2,24 +2,32 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: 'and_res_guard.gradle'
+//下面这句加在文件头，脚本方式引入
+apply from: 'config.gradle'
+
+//签名信息
+def keyFile = "${storeFile}"
+def keyPwd = "${storePassword}"
+def alias = "${keyAlias}"
+def aliasPwd = "${keyPassword}"
 
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/PlainFiles/项目/keystore/awesomeclock.keystore')
-            keyAlias = 'awesome0'
-            storePassword 'key999'
-            keyPassword 'key999'
+            storeFile file(keyFile)
+            keyAlias = alias
+            storePassword keyPwd
+            keyPassword aliasPwd
         }
     }
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.plain.awesome_clock"
+        applicationId "com.plain.awesome_clock_ace"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 20
-        versionName "1.0.2 - 脱胎换骨"
+        versionName "1.0.0-alpha"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
     }

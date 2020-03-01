@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
    
-    <com.plain.awesome_clock.view.digit.TabDigit
+    <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charHighHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.plain.awesome_clock.view.digit.TabDigit
+    <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charLowHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         clock:cardElevation="0dp"
         clock:cardPreventCornerOverlap="false">
 
-        <com.plain.awesome_clock.view.GlintTextView
+        <com.plain.awesome_clock_ace.view.GlintTextView
             android:id="@+id/tvPoint01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,12 +37,12 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.plain.awesome_clock.view.digit.TabDigit
+    <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charHighMinute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.plain.awesome_clock.view.digit.TabDigit
+    <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charLowMinute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
         clock:cardElevation="0dp"
         clock:cardPreventCornerOverlap="false">
 
-        <com.plain.awesome_clock.view.GlintTextView
+        <com.plain.awesome_clock_ace.view.GlintTextView
             android:id="@+id/tvPoint02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,13 +69,13 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.plain.awesome_clock.view.digit.TabDigit
+    <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charHighSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <com.plain.awesome_clock.view.digit.TabDigit
+    <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charLowSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
