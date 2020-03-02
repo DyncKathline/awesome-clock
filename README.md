@@ -18,7 +18,7 @@
 
 ### 预览
 
-演示机型：HUAWEI Mate 30 Pro
+演示机型：Google Pixel 3
 
 <table>
     <tr>
@@ -26,11 +26,11 @@
         <td>首页</td> 
    </tr>
     <tr>
-        <td rowspan="2"><img src='./screenshot/setting.jpg' /></td>    
-        <td ><img src='./screenshot/clock_01.jpg' /></td>  
+        <td rowspan="2"><img src='./screenshot/setting.png' /></td>    
+        <td ><img src='./screenshot/clock_01.png' /></td>  
     </tr>
     <tr>
-        <td ><img src='./screenshot/clock_02.jpg' /></td>  
+        <td ><img src='./screenshot/clock_02.png' /></td>  
     </tr>
 </table>
 
@@ -45,7 +45,7 @@
 ### 特点
 
 - 纯粹的翻页时钟
-- 可对时钟的翻页背景色、文字颜色和小时制等进行设置
+- 可对时钟的大小、翻页背景色、文字颜色和小时制等进行设置
 - 没有任何特殊权限请求
 
 ### 发布 
@@ -57,6 +57,17 @@
 - [国内站点Gitee(推荐)](https://gitee.com/plain-dev/awesome-clock-release/releases)
 
 ### 更新日志
+
+#### v1.0.4
+
+本次更新内容如下
+
+- 新增自定义时钟大小（长按时钟页面进入） 🔧
+- 修复在“12小时制”状态下中午12点显示00点的问题 🐛
+- 隐藏首页设置按钮，调整打开方式（双击时钟页面进入） ♻️
+- 迁移到Android X 🤖️
+- 优化打包体积 📦
+- 更换包名 📃
 
 #### v1.0.3
 
