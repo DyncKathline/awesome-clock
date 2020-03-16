@@ -11,8 +11,11 @@ import android.view.View
 import android.widget.LinearLayout
 
 import com.plain.awesome_clock_ace.R
+import com.plain.awesome_clock_ace.filpClock.FlipClockFragment
+import com.plain.awesome_clock_ace.utils.DateUtils
 import com.plain.awesome_clock_ace.utils.SettingCacheHelper
 import com.plain.awesome_clock_ace.view.digit.TabDigit
+import kotlinx.android.synthetic.main.fragment_flip_clock.*
 import kotlinx.android.synthetic.main.layout_flip_clock.view.*
 
 import java.util.Calendar
@@ -69,6 +72,7 @@ class FlipClockView @JvmOverloads constructor(
     private fun initRunnable() {
         runnable = Runnable {
             Log.d(TAG, "run")
+            checkSpecialTime()
             elapsedTime += 1
             mCharLowSecond.start()
             if (elapsedTime % 10 == 0L) {
@@ -89,6 +93,15 @@ class FlipClockView @JvmOverloads constructor(
             mHandler.sendEmptyMessageDelayed(MSG_TASK, 1000)
         }
 
+    }
+
+    private fun checkSpecialTime() {
+        val hour = DateUtils.getHour()
+        if (hour == "13" || hour == "12" || hour == "00") {
+            Log.d(TAG,"Refresh Page")
+            pause()
+            resume()
+        }
     }
 
     override fun onFinishInflate() {
