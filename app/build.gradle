@@ -26,8 +26,8 @@ android {
         applicationId "com.plain.awesome_clock_ace"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 20
-        versionName "1.0.0-alpha"
+        versionCode 21
+        versionName "1.0.1-alpha"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
     }

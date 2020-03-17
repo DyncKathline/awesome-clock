@@ -52,11 +52,17 @@
 
 最新版本可在版本发布页查看
 
-- 酷安应用市场
+- [酷安应用市场](https://www.coolapk.com/apk/256364) 
 - [国际站点Github](https://github.com/plain-dev/awesome-clock/releases)
 - [国内站点Gitee(推荐)](https://gitee.com/plain-dev/awesome-clock-release/releases)
 
 ### 更新日志
+
+#### v1.0.5
+
+本次更新内容如下
+
+- 修复特殊时间(00、12、13)显示错误的问题 🐛
 
 #### v1.0.4
 
