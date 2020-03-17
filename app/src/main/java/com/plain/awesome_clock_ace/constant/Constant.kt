@@ -32,4 +32,6 @@ object Constant {
 
     const val CLOCK_PADDING_TYPE_2 = "clock_padding_2";
 
+    const val REBUILDING = "REBUILDING";
+
 }

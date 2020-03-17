@@ -71,8 +71,8 @@ class FlipClockView @JvmOverloads constructor(
 
     private fun initRunnable() {
         runnable = Runnable {
-            Log.d(TAG, "run")
-            checkSpecialTime()
+            Log.d(TAG, "Running -> $elapsedTime")
+            listener?.onChange(elapsedTime.toString())
             elapsedTime += 1
             mCharLowSecond.start()
             if (elapsedTime % 10 == 0L) {
@@ -93,15 +93,6 @@ class FlipClockView @JvmOverloads constructor(
             mHandler.sendEmptyMessageDelayed(MSG_TASK, 1000)
         }
 
-    }
-
-    private fun checkSpecialTime() {
-        val hour = DateUtils.getHour()
-        if (hour == "13" || hour == "12" || hour == "00") {
-            Log.d(TAG,"Refresh Page")
-            pause()
-            resume()
-        }
     }
 
     override fun onFinishInflate() {
@@ -345,6 +336,12 @@ class FlipClockView @JvmOverloads constructor(
         }
         return hour;
     }
+
+    interface IElapsedTimeListener {
+        fun onChange(time: String);
+    }
+
+    var listener: IElapsedTimeListener? = null
 
     companion object {
 

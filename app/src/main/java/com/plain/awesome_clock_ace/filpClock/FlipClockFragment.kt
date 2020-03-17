@@ -20,6 +20,7 @@ import com.plain.awesome_clock_ace.utils.DateUtils
 import com.plain.awesome_clock_ace.utils.MultiClickHelper
 import com.plain.awesome_clock_ace.utils.SettingCacheHelper
 import com.plain.awesome_clock_ace.utils.ToastUtils
+import com.plain.awesome_clock_ace.view.FlipClockView
 import kotlinx.android.synthetic.main.fragment_flip_clock.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -31,7 +32,7 @@ import org.greenrobot.eventbus.ThreadMode
  * @author Plain
  * @date 2019-11-28 14:34
  */
-class FlipClockFragment : BaseFragment() {
+class FlipClockFragment : BaseFragment(),FlipClockView.IElapsedTimeListener {
 
     companion object {
 
@@ -104,6 +105,7 @@ class FlipClockFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        flipClockView.listener = this
         size_bar.setOnSeekBarChangeListener(textSizeListener)
         padding_size_bar.setOnSeekBarChangeListener(paddingSizeListener)
         btnSave.setOnClickListener {
@@ -182,6 +184,18 @@ class FlipClockFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
+    }
+
+    override fun onChange(time: String) {
+        checkSpecialTime(time)
+    }
+
+    // 43199 00:00 46799 13:00
+    private fun checkSpecialTime(time: String) {
+        if (time == "43199" || time == "46799") {
+            Log.d(TAG, "Refresh Page")
+            EventBus.getDefault().post(Constant.REBUILDING)
+        }
     }
 
 }

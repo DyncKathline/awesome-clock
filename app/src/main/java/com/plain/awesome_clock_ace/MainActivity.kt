@@ -10,6 +10,7 @@ import com.plain.awesome_clock_ace.filpClock.FlipClockFragment
 import com.plain.awesome_clock_ace.setting.SettingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class MainActivity : BaseActivity() {
 
@@ -50,6 +51,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        EventBus.getDefault().register(this)
         setInit()
     }
 
@@ -85,6 +87,19 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         initViewPager()
+    }
+
+    @Subscribe
+    fun onEvent(value: String) {
+        if (value == Constant.REBUILDING) {
+            Log.d(TAG,"Rebuilding View")
+            initViewPager()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
     private class MyPagerAdapter(

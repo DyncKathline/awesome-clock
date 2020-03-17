@@ -1,0 +1,7 @@
+ext {
+    storeFile = "/Users/PlainFiles/项目/KeyStore/AwesomeClockAce.keystore"
+    storePassword = "key1010"
+    keyAlias = "awesome0"
+    keyPassword = "key1010"
+}
+
