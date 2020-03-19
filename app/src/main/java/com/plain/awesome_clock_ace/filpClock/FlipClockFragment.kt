@@ -32,7 +32,7 @@ import org.greenrobot.eventbus.ThreadMode
  * @author Plain
  * @date 2019-11-28 14:34
  */
-class FlipClockFragment : BaseFragment(),FlipClockView.IElapsedTimeListener {
+class FlipClockFragment : BaseFragment(), FlipClockView.IElapsedTimeListener {
 
     companion object {
 
@@ -81,7 +81,6 @@ class FlipClockFragment : BaseFragment(),FlipClockView.IElapsedTimeListener {
 
         }
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -190,9 +189,9 @@ class FlipClockFragment : BaseFragment(),FlipClockView.IElapsedTimeListener {
         checkSpecialTime(time)
     }
 
-    // 43199 00:00 46799 13:00
+    // 43199 00:00(12) 46799 13:00 86399 00:00(24)
     private fun checkSpecialTime(time: String) {
-        if (time == "43199" || time == "46799") {
+        if (time == "43199" || time == "46799" || time == "86399") {
             Log.d(TAG, "Refresh Page")
             EventBus.getDefault().post(Constant.REBUILDING)
         }
