@@ -1,12 +1,16 @@
 package com.plain.awesome_clock_ace.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * 闪烁的文本
@@ -14,7 +18,7 @@ import android.view.View;
  * @author Plain
  * @date 2019/12/2 11:01 上午
  */
-class GlintTextView extends AppCompatTextView {
+public class GlintTextView extends AppCompatTextView {
 
     private final String TAG = "GlintTextView";
     private final int CODE = 0x11;
@@ -44,6 +48,7 @@ class GlintTextView extends AppCompatTextView {
             }
         }
     };
+    private Paint mPaint;
 
     public GlintTextView(Context context) {
         super(context);
@@ -60,7 +65,23 @@ class GlintTextView extends AppCompatTextView {
         init();
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        mPaint.setTextSize(getTextSize());
+        mPaint.setColor(getCurrentTextColor());
+        String text = getText().toString();
+        int startX = (int) (getWidth() / 2 - mPaint.measureText(text) / 2);
+        //解决高度绘制不居中
+        Paint.FontMetricsInt fm = mPaint.getFontMetricsInt();
+        int startY = getHeight() / 2 - fm.bottom + (fm.descent - fm.ascent - fm.leading) / 2;
+//        Log.i("kath---", fm.toString() + ", height: " + getHeight() + ", x: " + startX + ", y: " + startY);
+
+        canvas.drawText(text, startX, startY, mPaint);
+    }
+
     private void init() {
+        mPaint = new Paint();
+        mPaint.setTextSize(getTextSize());
         stopHandler();
         startHandler(isGlint);
     }

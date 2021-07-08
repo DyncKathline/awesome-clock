@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Plain
  * @date 2019-11-28 14:34
  */
-public class FlipClockFragment extends Fragment implements FlipClockView.IElapsedTimeListener {
+public class FlipClockFragment extends Fragment {
 
     private final String TAG = "FlipClock";
     private View rootView;
@@ -101,6 +101,8 @@ public class FlipClockFragment extends Fragment implements FlipClockView.IElapse
         return rootView;
     }
 
+    private long elapsedTime;
+
     private void initView() {
         mainView = (FrameLayout) rootView.findViewById(R.id.mainView);
         flipClockView = (FlipClockView) rootView.findViewById(R.id.flipClockView);
@@ -108,6 +110,18 @@ public class FlipClockFragment extends Fragment implements FlipClockView.IElapse
         sizeBar = (AppCompatSeekBar) rootView.findViewById(R.id.size_bar);
         paddingSizeBar = (AppCompatSeekBar) rootView.findViewById(R.id.padding_size_bar);
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
+//        flipClockView.resume();
+        int hour = (int) (elapsedTime / 3600);
+        int minute = (int) (elapsedTime / 60);
+        int second = (int) (elapsedTime - hour * 3600 - minute * 60);
+        flipClockView.updateTime(hour, minute, second);
+        flipClockView.setListener(new FlipClockView.IElapsedTimeListener() {
+            @Override
+            public void onChange(long time) {
+                elapsedTime = time;
+
+            }
+        });
     }
 
     private void goSettingPage() {
@@ -117,7 +131,6 @@ public class FlipClockFragment extends Fragment implements FlipClockView.IElapse
     @Override
     public void onResume() {
         super.onResume();
-        flipClockView.setListener(this);
         sizeBar.setOnSeekBarChangeListener(textSizeListener);
         paddingSizeBar.setOnSeekBarChangeListener(paddingSizeListener);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -145,8 +158,17 @@ public class FlipClockFragment extends Fragment implements FlipClockView.IElapse
                 goSettingPage();
             }
         }, 2));
-        flipClockView.resume();
+        if(SettingCacheHelper.getClockViewSize() != 0) {
+            flipClockView.customTextSize(SettingCacheHelper.getClockViewSize());
+        }
+        flipClockView.customPadding(paddingSizeBar.getProgress());
         updateSetting();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        flipClockView.pause();
     }
 
     private void saveCustomSizeSetting() {
@@ -184,21 +206,15 @@ public class FlipClockFragment extends Fragment implements FlipClockView.IElapse
         flipClockView.setFlipClockIsShowSecond(SettingCacheHelper.getClockIsShowSecond());
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        flipClockView.pause();
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(String event) {
         switch (event) {
-            case Constant.CLOCK_RESUME: {
-                flipClockView.resume();
-            }
-            case Constant.CLOCK_PAUSE: {
-                flipClockView.pause();
-            }
+//            case Constant.CLOCK_RESUME: {
+//                flipClockView.resume();
+//            }
+//            case Constant.CLOCK_PAUSE: {
+//                flipClockView.pause();
+//            }
         }
     }
 
@@ -206,10 +222,6 @@ public class FlipClockFragment extends Fragment implements FlipClockView.IElapse
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-    }
-
-    public void onChange(String time) {
-        checkSpecialTime(time);
     }
 
     // 43199 00:00(12) 46799 13:00 86399 00:00(24)

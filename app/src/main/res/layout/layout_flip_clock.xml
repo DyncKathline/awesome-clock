@@ -3,6 +3,7 @@
     xmlns:clock="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="horizontal">
    
     <com.plain.awesome_clock_ace.view.digit.TabDigit
@@ -16,26 +17,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/clock_margin" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/flPoint01"
-        android:layout_width="@dimen/point_area_size"
+    <com.plain.awesome_clock_ace.view.GlintTextView
+        android:id="@+id/tvPoint01"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#121212"
-        clock:cardElevation="0dp"
-        clock:cardPreventCornerOverlap="false">
-
-        <com.plain.awesome_clock_ace.view.GlintTextView
-            android:id="@+id/tvPoint01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/point_text"
-            android:textColor="#bababa"
-            android:textSize="@dimen/point_text_size"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
+        android:text="@string/point_text"
+        android:textColor="#bababa"
+        android:textSize="@dimen/point_text_size"
+        android:textStyle="bold" />
 
     <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charHighMinute"
@@ -48,26 +38,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/clock_margin" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/flPoint02"
-        android:layout_width="@dimen/point_area_size"
+    <com.plain.awesome_clock_ace.view.GlintTextView
+        android:id="@+id/tvPoint02"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#121212"
-        clock:cardElevation="0dp"
-        clock:cardPreventCornerOverlap="false">
-
-        <com.plain.awesome_clock_ace.view.GlintTextView
-            android:id="@+id/tvPoint02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/point_text"
-            android:textColor="#bababa"
-            android:textSize="@dimen/point_text_size"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
+        android:text="@string/point_text"
+        android:textColor="#bababa"
+        android:textSize="@dimen/point_text_size"
+        android:textStyle="bold" />
 
     <com.plain.awesome_clock_ace.view.digit.TabDigit
         android:id="@+id/charHighSecond"

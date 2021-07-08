@@ -7,6 +7,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.IntDef;
@@ -16,6 +17,8 @@ import androidx.core.content.ContextCompat;
 
 import com.plain.awesome_clock_ace.R;
 import com.plain.awesome_clock_ace.view.digit.TabDigit;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,8 +34,6 @@ public class FlipClockView extends LinearLayout {
 
     private final String TAG = "FlipClock";
 
-    private final int MSG_TASK = 10;
-
     private char[] HOURS = new char[]{'0', '1', '2'};
     private char[] SEXAGISIMAL = new char[]{'0', '1', '2', '3', '4', '5'};
 
@@ -42,8 +43,6 @@ public class FlipClockView extends LinearLayout {
     private TabDigit mCharLowMinute;
     private TabDigit mCharHighHour;
     private TabDigit mCharLowHour;
-    private CardView mFlPoint01;
-    private CardView mFlPoint02;
     private GlintTextView mTvPoint01;
     private GlintTextView mTvPoint02;
 
@@ -64,25 +63,12 @@ public class FlipClockView extends LinearLayout {
     private int clockViewSize;
     private int clockViewPadding;
 
-    private Handler mHandler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == MSG_TASK && !mPause) {
-                post(runnable);
-            }
-        }
-    };
-    private TabDigit charHighHour;
-    private TabDigit charLowHour;
-    private CardView flPoint01;
-    private GlintTextView tvPoint01;
-    private TabDigit charHighMinute;
-    private TabDigit charLowMinute;
-    private CardView flPoint02;
-    private GlintTextView tvPoint02;
-    private TabDigit charHighSecond;
-    private TabDigit charLowSecond;
+    private Handler mHandler = getHandler();
+
+    @NotNull
+    public Handler getHandler() {
+        return new Handler(Looper.getMainLooper());
+    }
 
     public FlipClockView(Context context) {
         super(context);
@@ -106,16 +92,14 @@ public class FlipClockView extends LinearLayout {
     }
 
     private void initView() {
-        charHighHour = (TabDigit) findViewById(R.id.charHighHour);
-        charLowHour = (TabDigit) findViewById(R.id.charLowHour);
-        flPoint01 = (CardView) findViewById(R.id.flPoint01);
-        tvPoint01 = (GlintTextView) findViewById(R.id.tvPoint01);
-        charHighMinute = (TabDigit) findViewById(R.id.charHighMinute);
-        charLowMinute = (TabDigit) findViewById(R.id.charLowMinute);
-        flPoint02 = (CardView) findViewById(R.id.flPoint02);
-        tvPoint02 = (GlintTextView) findViewById(R.id.tvPoint02);
-        charHighSecond = (TabDigit) findViewById(R.id.charHighSecond);
-        charLowSecond = (TabDigit) findViewById(R.id.charLowSecond);
+        mCharHighHour = findViewById(R.id.charHighHour);
+        mCharLowHour = findViewById(R.id.charLowHour);
+        mTvPoint01 = findViewById(R.id.tvPoint01);
+        mCharHighMinute = findViewById(R.id.charHighMinute);
+        mCharLowMinute = findViewById(R.id.charLowMinute);
+        mTvPoint02 = findViewById(R.id.tvPoint02);
+        mCharHighSecond = findViewById(R.id.charHighSecond);
+        mCharLowSecond = findViewById(R.id.charLowSecond);
     }
 
     private void initRunnable() {
@@ -123,9 +107,12 @@ public class FlipClockView extends LinearLayout {
 
             @Override
             public void run() {
-                Log.d(TAG, "Running -> $elapsedTime");
-                if (listener != null) {
-                    listener.onChange(elapsedTime + "");
+                if(mPause) {
+                   return;
+                }
+                Log.d(TAG, "Running -> " + elapsedTime);
+                if (iElapsedTimeListener != null) {
+                    iElapsedTimeListener.onChange(elapsedTime);
                 }
                 elapsedTime += 1;
                 mCharLowSecond.start();
@@ -144,7 +131,7 @@ public class FlipClockView extends LinearLayout {
                 if (elapsedTime % 36000 == 0L) {
                     mCharHighHour.start();
                 }
-                mHandler.sendEmptyMessageDelayed(MSG_TASK, 1000);
+                mHandler.postDelayed(this, 1000);
             }
         };
 
@@ -159,12 +146,19 @@ public class FlipClockView extends LinearLayout {
         mCharLowMinute = findViewById(R.id.charLowMinute);
         mCharHighHour = findViewById(R.id.charHighHour);
         mCharLowHour = findViewById(R.id.charLowHour);
-        mFlPoint01 = findViewById(R.id.flPoint01);
-        mFlPoint02 = findViewById(R.id.flPoint02);
         mTvPoint01 = findViewById(R.id.tvPoint01);
         mTvPoint02 = findViewById(R.id.tvPoint02);
 
         initFlipView();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if(runnable != null) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler = null;
+        }
     }
 
     /**
@@ -177,8 +171,6 @@ public class FlipClockView extends LinearLayout {
         setFlipView(mCharLowMinute);
         setFlipView(mCharHighHour, HOURS);
         setFlipView(mCharLowHour);
-        setCardViewSize(mFlPoint01);
-        setCardViewSize(mFlPoint02);
     }
 
     private void setFlipView(TabDigit view) {
@@ -244,17 +236,6 @@ public class FlipClockView extends LinearLayout {
     }
 
     /**
-     * 设置 CardView Size
-     */
-    private void setCardViewSize(CardView cardView) {
-        if (isShowSecond) {
-            cardView.setRadius(dip2px(getContext(), 4));
-        } else {
-            cardView.setRadius(dip2px(getContext(), 4));
-        }
-    }
-
-    /**
      * 设置指针是否闪烁
      */
     public void setFlipClockIsGlint(boolean isGlint) {
@@ -270,11 +251,11 @@ public class FlipClockView extends LinearLayout {
         if (isShowSecond) {
             mCharHighSecond.setVisibility(View.VISIBLE);
             mCharLowSecond.setVisibility(View.VISIBLE);
-            mFlPoint02.setVisibility(View.VISIBLE);
+            mTvPoint01.setVisibility(View.VISIBLE);
         } else {
             mCharHighSecond.setVisibility(View.GONE);
             mCharLowSecond.setVisibility(View.GONE);
-            mFlPoint02.setVisibility(View.GONE);
+            mTvPoint02.setVisibility(View.GONE);
         }
         setFlipViewSize(mCharHighSecond);
         setFlipViewSize(mCharLowSecond);
@@ -294,10 +275,10 @@ public class FlipClockView extends LinearLayout {
         setTextAndBgColor(textColor, bgColor, mCharLowMinute);
         setTextAndBgColor(textColor, bgColor, mCharHighHour);
         setTextAndBgColor(textColor, bgColor, mCharLowHour);
-        flPoint01.setCardBackgroundColor(bgColor);
-        flPoint02.setCardBackgroundColor(bgColor);
-        tvPoint01.setTextColor(textColor);
-        tvPoint02.setTextColor(textColor);
+        mTvPoint01.setBackgroundColor(bgColor);
+        mTvPoint02.setBackgroundColor(bgColor);
+        mTvPoint01.setTextColor(textColor);
+        mTvPoint02.setTextColor(textColor);
     }
 
     private void setTextColor(int textColor, TabDigit view) {
@@ -321,6 +302,8 @@ public class FlipClockView extends LinearLayout {
         mCharLowMinute.setTextSize(size);
         mCharHighHour.setTextSize(size);
         mCharLowHour.setTextSize(size);
+        mTvPoint01.setTextSize(size / 2);
+        mTvPoint02.setTextSize(size / 2);
     }
 
     public void customPadding(int padding) {
@@ -332,10 +315,16 @@ public class FlipClockView extends LinearLayout {
         mCharLowHour.setPadding(padding);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    }
+
     public void pause() {
         Log.d(TAG, "pause");
-        tvPoint01.pause();
-        tvPoint02.pause();
+        mTvPoint01.pause();
+        mTvPoint02.pause();
         mHandler.removeCallbacksAndMessages(null);
         mPause = true;
         mCharHighSecond.sync();
@@ -348,9 +337,11 @@ public class FlipClockView extends LinearLayout {
 
     public void resume() {
         Log.d(TAG, "resume");
-        tvPoint01.resume();
-        tvPoint02.resume();
+        mTvPoint01.resume();
+        mTvPoint02.resume();
         mHandler.removeCallbacksAndMessages(null);
+        mHandler = null;
+        mHandler = getHandler();
         mPause = false;
         Calendar time = Calendar.getInstance();
         /* hours*/
@@ -382,7 +373,43 @@ public class FlipClockView extends LinearLayout {
                 + lowMinute * 60 + highMinute * 600
                 + lowHour * 3600 + highHour * 36000;
 
-        mHandler.sendEmptyMessageDelayed(MSG_TASK, 1000);
+        mHandler.postDelayed(runnable, 1000);
+    }
+
+    public void updateTime(int hour, int minutes, int seconds) {
+        mTvPoint01.resume();
+        mTvPoint02.resume();
+        mHandler.removeCallbacksAndMessages(null);
+        mHandler = null;
+        mHandler = getHandler();
+        mPause = false;
+        /* hours*/
+        // 2020.02.29 fix 12小时制中午12点显示0的问题
+        int highHour = hour / 10;
+        mCharHighHour.setChar(highHour);
+
+        int lowHour = hour - highHour * 10;
+        mCharLowHour.setChar(lowHour);
+
+        /* minutes*/
+        int highMinute = minutes / 10;
+        mCharHighMinute.setChar(highMinute);
+
+        int lowMinute = minutes - highMinute * 10;
+        mCharLowMinute.setChar(lowMinute);
+
+        /* seconds*/
+        int highSecond = seconds / 10;
+        mCharHighSecond.setChar(highSecond);
+
+        int lowSecond = seconds - highSecond * 10;
+        mCharLowSecond.setChar(lowSecond);
+
+        elapsedTime = lowSecond + highSecond * 10
+                + lowMinute * 60 + highMinute * 600
+                + lowHour * 3600 + highHour * 36000;
+
+        mHandler.postDelayed(runnable, 1000);
     }
 
     /**
@@ -401,13 +428,13 @@ public class FlipClockView extends LinearLayout {
     }
 
     public interface IElapsedTimeListener {
-        void onChange(String time);
+        void onChange(long time);
     }
 
-    IElapsedTimeListener listener = null;
+    IElapsedTimeListener iElapsedTimeListener = null;
 
     public void setListener(IElapsedTimeListener listener) {
-        this.listener = listener;
+        iElapsedTimeListener = listener;
     }
 
     public static int dip2px(Context context, float dpValue) {

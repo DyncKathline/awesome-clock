@@ -179,7 +179,7 @@ public class TabDigit extends View implements Runnable {
         calculateTextSize(mTextMeasured);
 
         int childWidth = mTextMeasured.width() + mPadding;
-        int childHeight = mTextMeasured.height() + mPadding;
+        int childHeight = mTextMeasured.height() + mPadding * 3;
         measureTabs(childWidth, childHeight);
 
         int maxChildWidth = mMiddleTab.maxWith();
