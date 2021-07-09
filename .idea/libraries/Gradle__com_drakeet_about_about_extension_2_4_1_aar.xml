@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.drakeet.about:about-extension:2.4.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d31d829970aa188d170fd185f8eac8f1/about-extension-2.4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d31d829970aa188d170fd185f8eac8f1/about-extension-2.4.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.drakeet.about/about-extension/2.4.1/cf2f53b358b7e3c7a76273ed63b2743ba487530e/about-extension-2.4.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.drakeet.about/about-extension/2.4.1/8ea8055e7ea409f582780ee68b51ac2caef22ecf/about-extension-2.4.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

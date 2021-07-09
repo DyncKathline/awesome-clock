@@ -1,27 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:digit="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#000000"
+    android:id="@+id/mainView"
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <com.plain.awesome_clock_ace.view.FlipClockView
+        android:id="@+id/flipClockView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center" />
 
-    <ImageView
-        android:id="@+id/ivSetting"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="end"
-        android:layout_marginEnd="10dp"
-        android:padding="20dp"
-        android:src="@drawable/ic_settings"
-        android:visibility="gone" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/customSizeToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="#65464646"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="5dp"
+                android:text="时钟大小"
+                android:textColor="@color/color_white" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/size_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="800"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="5dp"
+                android:text="时钟间距"
+                android:textColor="@color/color_white" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/padding_size_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:padding="5dp" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>

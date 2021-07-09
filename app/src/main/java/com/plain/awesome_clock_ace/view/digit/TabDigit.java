@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.os.Build;
 import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.plain.awesome_clock_ace.R;
@@ -19,9 +20,6 @@ import com.plain.awesome_clock_ace.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Eugeni on 16/10/2016.
- */
 public class TabDigit extends View implements Runnable {
 
     private final static int LOWER_POSITION = 0;
@@ -55,7 +53,8 @@ public class TabDigit extends View implements Runnable {
 
     private Rect mTextMeasured = new Rect();
 
-    private int mPadding = 0;
+    private int mWidthPadding = 0;
+    private int mHeightPadding = 0;
 
     private char[] mChars = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -107,7 +106,8 @@ public class TabDigit extends View implements Runnable {
         ta.recycle();
 
         if (padding > 0) {
-            mPadding = padding;
+            mWidthPadding = padding;
+            mHeightPadding = padding;
         }
 
         if (textSize > 0) {
@@ -178,8 +178,8 @@ public class TabDigit extends View implements Runnable {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         calculateTextSize(mTextMeasured);
 
-        int childWidth = mTextMeasured.width() + mPadding;
-        int childHeight = mTextMeasured.height() + mPadding * 3;
+        int childWidth = mTextMeasured.width() + mWidthPadding;
+        int childHeight = mTextMeasured.height() + mHeightPadding;
         measureTabs(childWidth, childHeight);
 
         int maxChildWidth = mMiddleTab.maxWith();
@@ -236,8 +236,9 @@ public class TabDigit extends View implements Runnable {
         return (int) mNumberPaint.getTextSize();
     }
 
-    public void setPadding(int padding) {
-        mPadding = padding;
+    public void setPadding(int widthPadding, int heightPadding) {
+        mWidthPadding = widthPadding;
+        mHeightPadding = heightPadding;
         requestLayout();
     }
 
@@ -260,8 +261,12 @@ public class TabDigit extends View implements Runnable {
         mDividerPaint.setColor(color);
     }
 
-    public int getPadding(){
-        return mPadding;
+    public int getWidthPadding() {
+        return mWidthPadding;
+    }
+
+    public int getHeightPadding() {
+        return mHeightPadding;
     }
 
     public void setTextColor(int color) {
@@ -354,8 +359,16 @@ public class TabDigit extends View implements Runnable {
         state = LOWER_POSITION;
     }
 
-    public void sync() {
-        makeSureCycleIsClosed();
+    /**
+     * 重置状态
+     */
+    public void reset() {
+        mAlpha = 0;
+        mTime = -1;
+        state = LOWER_POSITION;
+        mTopTab.rotate(180);
+        mMiddleTab.rotate(180);
+        mBottomTab.rotate(0);
         invalidate();
     }
 

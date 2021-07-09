@@ -3,16 +3,13 @@ package com.plain.awesome_clock_ace.view;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.plain.awesome_clock_ace.R;
@@ -24,12 +21,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
 
-/**
- * FlipClockView
- *
- * @author Plain
- * @date 2019-11-28 12:14
- */
 public class FlipClockView extends LinearLayout {
 
     private final String TAG = "FlipClock";
@@ -54,7 +45,7 @@ public class FlipClockView extends LinearLayout {
 
     @IntDef({ClockHourType.hour12, ClockHourType.hour24})
     @Retention(RetentionPolicy.SOURCE)
-    private @interface ClockHourType {
+    public @interface ClockHourType {
         int hour12 = 12;
         int hour24 = 24;
     }
@@ -92,14 +83,14 @@ public class FlipClockView extends LinearLayout {
     }
 
     private void initView() {
+        mCharHighSecond = findViewById(R.id.charHighSecond);
+        mCharLowSecond = findViewById(R.id.charLowSecond);
+        mCharHighMinute = findViewById(R.id.charHighMinute);
+        mCharLowMinute = findViewById(R.id.charLowMinute);
         mCharHighHour = findViewById(R.id.charHighHour);
         mCharLowHour = findViewById(R.id.charLowHour);
         mTvPoint01 = findViewById(R.id.tvPoint01);
-        mCharHighMinute = findViewById(R.id.charHighMinute);
-        mCharLowMinute = findViewById(R.id.charLowMinute);
         mTvPoint02 = findViewById(R.id.tvPoint02);
-        mCharHighSecond = findViewById(R.id.charHighSecond);
-        mCharLowSecond = findViewById(R.id.charLowSecond);
     }
 
     private void initRunnable() {
@@ -140,21 +131,15 @@ public class FlipClockView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mCharHighSecond = findViewById(R.id.charHighSecond);
-        mCharLowSecond = findViewById(R.id.charLowSecond);
-        mCharHighMinute = findViewById(R.id.charHighMinute);
-        mCharLowMinute = findViewById(R.id.charLowMinute);
-        mCharHighHour = findViewById(R.id.charHighHour);
-        mCharLowHour = findViewById(R.id.charLowHour);
-        mTvPoint01 = findViewById(R.id.tvPoint01);
-        mTvPoint02 = findViewById(R.id.tvPoint02);
 
+        initView();
         initFlipView();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        Log.d(TAG, "onDetachedFromWindow");
         if(runnable != null) {
             mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
@@ -219,12 +204,12 @@ public class FlipClockView extends LinearLayout {
         }
 
         if (clockViewPadding != 0) {
-            view.setPadding(clockViewPadding);
+            view.setPadding(clockViewPadding, clockViewPadding);
         } else {
             if (isShowSecond) {
-                view.setPadding(dip2px(getContext(), 15));
+                view.setPadding(dip2px(getContext(), 15), dip2px(getContext(), 15));
             } else {
-                view.setPadding(dip2px(getContext(), 15));
+                view.setPadding(dip2px(getContext(), 15), dip2px(getContext(), 15));
             }
         }
 
@@ -307,12 +292,12 @@ public class FlipClockView extends LinearLayout {
     }
 
     public void customPadding(int padding) {
-        mCharHighSecond.setPadding(padding);
-        mCharLowSecond.setPadding(padding);
-        mCharHighMinute.setPadding(padding);
-        mCharLowMinute.setPadding(padding);
-        mCharHighHour.setPadding(padding);
-        mCharLowHour.setPadding(padding);
+        mCharHighSecond.setPadding(padding, padding*2);
+        mCharLowSecond.setPadding(padding, padding*2);
+        mCharHighMinute.setPadding(padding, padding*2);
+        mCharLowMinute.setPadding(padding, padding*2);
+        mCharHighHour.setPadding(padding, padding*2);
+        mCharLowHour.setPadding(padding, padding*2);
     }
 
     @Override
@@ -327,12 +312,12 @@ public class FlipClockView extends LinearLayout {
         mTvPoint02.pause();
         mHandler.removeCallbacksAndMessages(null);
         mPause = true;
-        mCharHighSecond.sync();
-        mCharLowSecond.sync();
-        mCharHighMinute.sync();
-        mCharLowMinute.sync();
-        mCharHighHour.sync();
-        mCharLowHour.sync();
+        mCharHighSecond.reset();
+        mCharLowSecond.reset();
+        mCharHighMinute.reset();
+        mCharLowMinute.reset();
+        mCharHighHour.reset();
+        mCharLowHour.reset();
     }
 
     public void resume() {
@@ -343,6 +328,12 @@ public class FlipClockView extends LinearLayout {
         mHandler = null;
         mHandler = getHandler();
         mPause = false;
+        mCharHighSecond.reset();
+        mCharLowSecond.reset();
+        mCharHighMinute.reset();
+        mCharLowMinute.reset();
+        mCharHighHour.reset();
+        mCharLowHour.reset();
         Calendar time = Calendar.getInstance();
         /* hours*/
         // 2020.02.29 fix 12小时制中午12点显示0的问题
@@ -383,6 +374,12 @@ public class FlipClockView extends LinearLayout {
         mHandler = null;
         mHandler = getHandler();
         mPause = false;
+        mCharHighSecond.reset();
+        mCharLowSecond.reset();
+        mCharHighMinute.reset();
+        mCharLowMinute.reset();
+        mCharHighHour.reset();
+        mCharLowHour.reset();
         /* hours*/
         // 2020.02.29 fix 12小时制中午12点显示0的问题
         int highHour = hour / 10;

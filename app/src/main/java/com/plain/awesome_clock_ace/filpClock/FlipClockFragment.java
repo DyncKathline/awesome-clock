@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.plain.awesome_clock_ace.R;
 import com.plain.awesome_clock_ace.constant.Constant;
 import com.plain.awesome_clock_ace.setting.SettingActivity;
-import com.plain.awesome_clock_ace.utils.MultiClickHelper;
+import com.plain.awesome_clock_ace.utils.ClickUtil;
 import com.plain.awesome_clock_ace.utils.SettingCacheHelper;
 import com.plain.awesome_clock_ace.utils.ToastUtils;
 import com.plain.awesome_clock_ace.view.FlipClockView;
@@ -147,17 +147,24 @@ public class FlipClockFragment extends Fragment {
                 return true;
             }
         });
-        mainView.setOnTouchListener(new MultiClickHelper(new MultiClickHelper.MultiClickListener() {
+        final ClickUtil clickUtil = new ClickUtil().setClickCount(2);
+        clickUtil.setCallBack(new ClickUtil.CallBack() {
             @Override
-            public void onClickProcess(int index) {
+            public void onTick(int count) {
 
             }
 
             @Override
-            public void onDoSomething() {
+            public void onFinish() {
                 goSettingPage();
             }
-        }, 2));
+        });
+        mainView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickUtil.nClick();
+            }
+        });
         if(SettingCacheHelper.getClockViewSize() != 0) {
             flipClockView.customTextSize(SettingCacheHelper.getClockViewSize());
         }

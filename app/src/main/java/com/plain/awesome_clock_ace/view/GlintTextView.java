@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -24,6 +22,7 @@ public class GlintTextView extends AppCompatTextView {
     private final int CODE = 0x11;
 
     boolean isGlint = false;
+    boolean isHidden = false;
 
     private Runnable runnable = new Runnable() {
 
@@ -33,7 +32,9 @@ public class GlintTextView extends AppCompatTextView {
                 stopHandler();
                 return;
             }
-            setVisibility(View.INVISIBLE);
+//            setVisibility(View.INVISIBLE);
+            isHidden = true;
+            invalidate();
             mHandler.sendEmptyMessageDelayed(CODE, 500);
         }
     };
@@ -43,7 +44,9 @@ public class GlintTextView extends AppCompatTextView {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == CODE && isGlint) {
-                setVisibility(View.VISIBLE);
+//                setVisibility(View.VISIBLE);
+                isHidden = false;
+                invalidate();
                 postDelayed(runnable, 500);
             }
         }
@@ -76,7 +79,11 @@ public class GlintTextView extends AppCompatTextView {
         int startY = getHeight() / 2 - fm.bottom + (fm.descent - fm.ascent - fm.leading) / 2;
 //        Log.i("kath---", fm.toString() + ", height: " + getHeight() + ", x: " + startX + ", y: " + startY);
 
-        canvas.drawText(text, startX, startY, mPaint);
+        if(isHidden) {
+            canvas.drawText("", startX, startY, mPaint);
+        }else {
+            canvas.drawText(text, startX, startY, mPaint);
+        }
     }
 
     private void init() {

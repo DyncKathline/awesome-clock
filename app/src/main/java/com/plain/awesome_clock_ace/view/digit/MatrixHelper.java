@@ -3,9 +3,6 @@ package com.plain.awesome_clock_ace.view.digit;
 import android.graphics.Camera;
 import android.graphics.Matrix;
 
-/**
- * Created by Eugeni on 16/10/2016.
- */
 public class MatrixHelper {
 
     public static final Camera camera = new Camera();
